@@ -10,11 +10,16 @@
 
 ### General:
 Workspace is the space where I work on my project.
+
 Src (source file) is where projects are stored inside our workspace. Hence we can have multiple projects in our workspace.
+
 Building a workspace is like setting up the workspace.
 Build folder contains all the build information of projects.
+
 Logs contain the records of the projects.
+
 Devel contains the reference, setup things for development.
+
 By importing rospy in a python library we mean that we will run ros in a python code
 
 ### Nodes:
@@ -47,6 +52,7 @@ rostopic pub	publish data to topic
 rostopic type	print topic or field type
 ```
 
+<br>
 
 ### ROS data types (messsages):
 ROS can work only with certain data types only which can be found in:
@@ -78,6 +84,8 @@ trajectory_msgs/JointTrajectoryPoint[] points
   float64[] effort
   duration time_from_start
 ```
+<br>
+
 ### Roscore:
 Roscore is basically to used to start the ros master which initiates the other ros nodes and topics
 Before running any ros code we need to run the roscore command to kinda start ros
@@ -89,6 +97,7 @@ To run a node within a specific package, only nodes not launch files not service
 ```
 node_name is a python file
 
+<br>
 
 ### Echo:
 When we run a package using above command the packages runs no doubt but the message it should give to the subscriber is not reflected on the terminal because the terminal is not the subscriber to the publisher, to view the msg without subscribing to the publisher we use echo command
@@ -97,7 +106,9 @@ When we run a package using above command the packages runs no doubt but the mes
 rostopic echo/topic_name
 ```
 
-### Roslaunch
+<br>
+
+### Roslaunch:
 Roslauch allows to run multiple nodes simultaneously
 Roslaunch also run the roscore for us
 We can also run multiple copies of a single node dependent or independent of each other and rostopics using launch file
@@ -106,6 +117,7 @@ We can also run multiple copies of a single node dependent or independent of eac
 Roslaunch package_name launch_file
 ```
 
+<br>
 
 ### Keep in Mind:
 Double tab to get info about available options for a command
@@ -125,8 +137,12 @@ rospack list | grep package_name
 ```
 To find the location of package
 
+<br>
+
 ### Developing a node:
 A callback function is called every time the publisher publishes any msg, kinda interrupts, we use this interrupt and the msg published by the publisher to interpret our things, and for the rest of time subscriber does nothing.
+
+<br>
 
 ### ROSservices:
 Services are a client-server system where a node requests for a specific services required not so frequently to the package
@@ -143,6 +159,7 @@ rosservice uri	print service ROSRPC uri
 
 ```
 
+<br>
 
 ### Gazebo:
 A simulation environment.
@@ -150,12 +167,15 @@ Defines how the world sees the robot.
 How the world interacts with the robot.
 Does require collision and inertial properties
 
+<br>
+
 ### Rviz:
 Used to visualize the structure of the robot
 How the joints are defined in 3d space
 When we launch rviz we can pass some **parameters** like which robot description to include, in case of gazebo we tell which world to load and which robot to load.
 **Arguments** defined things like whether to pause the simulation at start up or not, basically modifying the platform software so as to fit our needs.
 
+<br>
 
 ### Transforms:
 Relation between joints of a robot
@@ -175,8 +195,9 @@ In velocity control we provide the velocity the joint should move
 
 **Transmissions** are like the interface between the controller and the joint, usually defined in urdf1
 
+<br>
 
-### Callback function
+### Callback function:
 The callback is called every time data is published on the topic that the node has subscribed to.
 But if want to recive the message only once or a limited number of times then we can use 
 ```
