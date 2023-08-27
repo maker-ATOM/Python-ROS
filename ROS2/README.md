@@ -3,7 +3,7 @@
 <details open="open">
   <summary>Table of Contents</summary>
   <ol>
-    <li><a href="#CLI - tools">ROS Wiki</a></li>
+    <li><a href="#CLI---tools">ROS Wiki</a></li>
     <ol>
         <li><a href="#Environment">Environment</a></li>
         <li><a href="#RQT-and-ROS2-tools">RQT and ROS2 tools</a></li>
@@ -16,6 +16,10 @@
         <li><a href="#ROSbag">ROSbag</a></li>
     </ol>
     <li><a href="#Projects">Projects</a></li>
+        <ol>
+        <li><a href="#On-Going">On-Going</a></li>
+        <li><a href="#Completed">Completed</a></li>
+    </ol>
     <li><a href="#Resources">Resources</a></li>
     <!-- <li><a href="#Description-of-src-files">Description of src files</a></li>
     <li><a href="#Project-Status">Project Status</a></li>
@@ -329,6 +333,19 @@ ros2 bag play <file_name>
 ```
 
 ## Projects
+
+### On going
+
+- Generation of custom ROS Services and Actions
+- Visulization of Path-Planning algorithms in Rviz
+ 
+### Completed
+
+- [Mapping-and-Navigation-with-TurtleBot3](https://github.com/maker-ATOM/Mapping-and-Navigation-with-TurtleBot3)
+Implementation of robotics concepts like mapping, localization, path planning, navigation and much more..
+
+- [SPARK-A-4DOF-ROS-ROBOTIC-ARM](https://github.com/maker-ATOM/SPARK-A-4DOF-ROS-ROBOTIC-ARM)
+Software platform for implementation of mathematical concepts like Forward Kinematics(FK), Inverse Kinematics(IK), Trajectory planning using a Robotic Arm in ROS.
 
 ## Resources
 
