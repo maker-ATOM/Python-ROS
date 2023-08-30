@@ -53,12 +53,14 @@
 ### Environment
 
 The core ROS 2 workspace is called the underlay. Subsequent local workspaces are called overlays.
+In general, it is recommended to use an overlay when you plan to iterate on a small number of packages, rather than putting all of your packages into the same workspace.
+Packages in our overlay will override packages in the underlay. It’s also possible to have several layers of underlays and overlays, with each successive overlay using the packages of its parent underlays.
+Our main ROS 2 installation will be your underlay for this tutorial. (Keep in mind that an underlay does not necessarily have to be the main ROS 2 installation.)
+<br>
+Without sourcing the setup files, we won’t be able to access ROS 2 commands, or find or use ROS 2 packages.
+<br>
 
-
- Without sourcing the setup files, we won’t be able to access ROS 2 commands, or find or use ROS 2 packages.
-
-
- Add this command to `.bashrc` file.
+Add this command to `.bashrc` file.
  ```python
  source /opt/ros/humble/setup.bash
  ```
@@ -84,7 +86,15 @@ IF any ROS2 package is not being located, the first thing we should do is check 
 
  We won’t be able to use the `sudo apt install ros-<distro>-<package>` command if we install from source.
 
+ Colcon is an iteration on the ROS build tools catkin_make.
 
+
+When colcon has completed building successfully, the output will be in the install directory. Before we can use any of the installed executables or libraries, we will need to add them to our path and library paths. colcon will have generated bash/bat files in the install directory to help set up the environment. These files will add all of the required elements to our path and library paths as well as provide any bash or shell commands exported by packages.
+
+Colcon supports multiple build types. The recommended build types are ament_cmake and ament_python.
+ament_cmake is a build system package used for building packages written in C++ and using the CMake build system. 
+ament_python is a build system package used for building Python packages in the ROS 2 ecosystem.
+In python packages, setup.py is the primary entry point for building.
 
 ### RQT and ROS2 tools
 
