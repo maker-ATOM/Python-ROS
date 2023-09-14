@@ -18,8 +18,10 @@ Basic utilization of publisher subscriber model.
 - rclpy
 - Node class
 
+**srvcli**
+Basic utilization of server client model.
 
-**Repository Structure**
+## Repository Structure
 ```python
 ├── pubsub
 │   ├── package.xml
