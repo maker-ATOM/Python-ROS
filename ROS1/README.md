@@ -31,7 +31,7 @@
     <li><a href="#Project-Upgradation">Project Upgradation</a></li> -->
   </ol>
 </details>
-***Note:*** The projects simple pubsub and turtlesim I worked on while understanding ROS have been lost only the written data is preserved.
+**Note:** The projects simple pubsub and turtlesim I worked on while understanding ROS have been lost only the written data is preserved.
 
 ## Fundamentals
 
