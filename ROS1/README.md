@@ -1,5 +1,36 @@
 # ROS1
 
+
+<details open="open">
+  <summary>Table of Contents</summary>
+  <ol>
+    <li><a href="#Fundamentals">Fundamentals</a></li>
+    <ol>
+        <li><a href="#Environment">Environment</a></li>
+        <li><a href="#General">General</a></li>
+        <li><a href="#Nodes">Nodes</a></li>
+        <li><a href="#Topics">Topics</a></li>
+        <li><a href="#ROS-data-types-(messsages)">ROS data types (messsages)</a></li>
+        <li><a href="#Roscore">Roscore</a></li>
+        <li><a href="#Echo">Echo</a></li>
+        <li><a href="#Roslaunch"> Roslaunch</a></li>
+        <li><a href="#Keep-in-Mind">Keep in Mind</a></li>
+        <li><a href="#Developing-a-node">Developing a node</a></li>
+        <li><a href="#ROSservices">ROSservices</a></li>
+        <li><a href="#Gazebo">Gazebo</a></li>
+        <li><a href="#Rviz">Rviz</a></li>
+        <li><a href="#Transforms">Transforms</a></li>
+        <li><a href="#Callback-function">Callback function</a></li>
+    </ol>
+    <li><a href="#Turtlesim">Turtlesim</a></li>
+    <li><a href="#Robotic Arm">Robotic Arm</a></li>
+    <li><a href="#SLAM">SLAM</a></li>
+    <li><a href="#Resources">Resources</a></li>
+    <!-- <li><a href="#Description-of-src-files">Description of src files</a></li>
+    <li><a href="#Project-Status">Project Status</a></li>
+    <li><a href="#Project-Upgradation">Project Upgradation</a></li> -->
+  </ol>
+</details>
 ***Note:*** The projects simple pubsub and turtlesim I worked on while understanding ROS have been lost only the written data is preserved.
 
 ## Fundamentals
@@ -8,7 +39,7 @@
 	<img src="Image/ros.png"/>
 </p>
 
-### General:
+### General
 Workspace is the space where I work on my project.
 
 Src (source file) is where projects are stored inside our workspace. Hence we can have multiple projects in our workspace.
@@ -22,7 +53,7 @@ Devel contains the reference, setup things for development.
 
 By importing rospy in a python library we mean that we will run ros in a python code
 
-### Nodes:
+### Nodes
 Nodes perform specific tasks.
 A node can be categorized as a publisher or a subscriber
 User subscribes to the topic to get messages.
@@ -34,7 +65,7 @@ rosnode info /node_name
 ```
 Usually the package we download contains various topics and we write subscriber codes for it.
 
-### Topics:
+### Topics
 Topic is basically a channel through which messages flow from publisher to subscriber
 Topics are channels which receive msgs from publisher and passes on to subscribers
 The messages published have only a specific data type
@@ -46,15 +77,12 @@ rostopic delay	display delay of topic from timestamp in header
 rostopic echo	print messages to screen
 rostopic find	find topics by type
 rostopic hz	display publishing rate of topic    
-rostopic info	print information about active topic
-rostopic list	list active topics
-rostopic pub	publish data to topic
-rostopic type	print topic or field type
+rostopic info	print information about active topicRoscore
 ```
 
 <br>
 
-### ROS data types (messsages):
+### ROS data types (messsages)
 ROS can work only with certain data types only which can be found in:
 
 ```python
@@ -83,10 +111,7 @@ trajectory_msgs/JointTrajectoryPoint[] points
   float64[] accelerations
   float64[] effort
   duration time_from_start
-```
-<br>
-
-### Roscore:
+```Roscore
 Roscore is basically to used to start the ros master which initiates the other ros nodes and topics
 Before running any ros code we need to run the roscore command to kinda start ros
 Rosrun:
@@ -99,7 +124,7 @@ node_name is a python file
 
 <br>
 
-### Echo:
+### Echo
 When we run a package using above command the packages runs no doubt but the message it should give to the subscriber is not reflected on the terminal because the terminal is not the subscriber to the publisher, to view the msg without subscribing to the publisher we use echo command
 
 ```python
@@ -108,7 +133,7 @@ rostopic echo/topic_name
 
 <br>
 
-### Roslaunch:
+### Roslaunch
 Roslauch allows to run multiple nodes simultaneously
 Roslaunch also run the roscore for us
 We can also run multiple copies of a single node dependent or independent of each other and rostopics using launch file
@@ -119,7 +144,7 @@ Roslaunch package_name launch_file
 
 <br>
 
-### Keep in Mind:
+### Keep in Mind
 Double tab to get info about available options for a command
 Every time we create a new package the workspace needs to build again
 To build the workspace we have to be inside the workspace
@@ -139,12 +164,12 @@ To find the location of package
 
 <br>
 
-### Developing a node:
+### Developing a node
 A callback function is called every time the publisher publishes any msg, kinda interrupts, we use this interrupt and the msg published by the publisher to interpret our things, and for the rest of time subscriber does nothing.
 
 <br>
 
-### ROSservices:
+### ROSservices
 Services are a client-server system where a node requests for a specific services required not so frequently to the package
 We can even use services offered by topics in our code
 Commands:
@@ -161,7 +186,7 @@ rosservice uri	print service ROSRPC uri
 
 <br>
 
-### Gazebo:
+### Gazebo
 A simulation environment.
 Defines how the world sees the robot.
 How the world interacts with the robot.
@@ -169,7 +194,7 @@ Does require collision and inertial properties
 
 <br>
 
-### Rviz:
+### Rviz
 Used to visualize the structure of the robot
 How the joints are defined in 3d space
 When we launch rviz we can pass some **parameters** like which robot description to include, in case of gazebo we tell which world to load and which robot to load.
@@ -177,7 +202,7 @@ When we launch rviz we can pass some **parameters** like which robot description
 
 <br>
 
-### Transforms:
+### Transforms
 Relation between joints of a robot
 
 Change in the parent link is reflected by the child link due to joints represented by **robot state publishers**. But in this there is no relative motion between the parent and child. Eg head and 
@@ -197,7 +222,7 @@ In velocity control we provide the velocity the joint should move
 
 <br>
 
-### Callback function:
+### Callback function
 The callback is called every time data is published on the topic that the node has subscribed to.
 But if want to recive the message only once or a limited number of times then we can use 
 ```
@@ -280,7 +305,7 @@ Gmappping is map generation tool which uses other libraries like openslam
 
 ---
 
-## Resources:
+## Resources
 
 - [Why do I think you should build this robot?](https://www.youtube.com/watch?v=OWeLUSzxMsw&list=PLunhqkrRNRhYAffV8JDiFOatQXuU-NnxT)
 
