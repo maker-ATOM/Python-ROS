@@ -10,13 +10,13 @@ Learnings of ROS1 (superficial).
 **ROS2**
 Learnings of ROS2 (in depth).
 
-    - ROS Wiki
+- ROS Wiki
 
 **pubsub**
 Basic utilization of publisher subscriber model.
 
-    - rclpy
-    - Node class
+- rclpy
+- Node class
 
 
 **Repository Structure**
