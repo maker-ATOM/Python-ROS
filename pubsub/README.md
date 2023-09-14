@@ -72,6 +72,21 @@ def main(args=None):
 
 The main function first initializes rclpy lib, creates a node, and then spins the node so that any callback function associated to that node is executed, which is timer_callback in this case.
 
+The subscriber similar to publisher utilizes create_subscriber method from class Node to subscriber to topic.
+
+```python
+    def __init__(self):
+        super().__init__('subscriber')
+        self.subscription = self.create_subscription(
+            String,
+            'topic',
+            self.listener_callback,
+            10)
+        self.subscription  # prevent unused variable warning
+```
+
+But instead of timer function we have a listener_callback which is called every time a data is published on the topic.
+
 ## ROSGraph
 <p align="center">
 	<img src="images/rosgraph.png" width="596" height="72"/>
