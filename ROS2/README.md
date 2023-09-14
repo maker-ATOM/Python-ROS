@@ -14,6 +14,7 @@
         <li><a href="#Actions">Actions</a></li>
         <li><a href="#Launch">Launch</a></li>
         <li><a href="#ROSbag">ROSbag</a></li>
+        <li><a href="#Script-Node-Executable-Name">Script vs Node vs Executable Name</a></li>
     </ol>
     <li><a href="#Projects">Projects</a></li>
         <ol>
@@ -140,10 +141,10 @@ Minimal package contents:
 - setup.py containing instructions for how to install the package
 - <package_name> - a directory with the same name as your package, used by ROS 2 tools to find your package, contains __init__.py
 
-Nested packages ar not allowed.
+Nested packages are not allowed.
 
 ```python
-ros2 pkg create --build-type ament_python <package_name> --dependencies rclpy
+ros2 pkg create <package_name> --build-type ament_python --dependencies rclpy
 ```
 
 To build a specific package,
@@ -297,6 +298,8 @@ To call a service,
 ros2 service call <service_name> <service_type> <arguments>
 ```
 
+Request and response may or may not have same rosmsg, this structure is defined within a `.srv` file.
+
 ### Parameters
 A parameter is a configuration value of a node. We can think of parameters as node settings. A node can store parameters as integers, floats, booleans, strings, and lists. In ROS 2, each node maintains its own parameters.
 
@@ -401,6 +404,30 @@ We also republish the data stored in the bag for introspection.
 ```python
 ros2 bag play <file_name>
 ```
+
+### Script Node Executable Name
+
+**Python Script Name**
+
+This refers to the name of the Python script file that contains the code for a ROS 2 node.
+It's simply the filename with the ".py" extension.
+This script typically defines a ROS 2 node, its functionality, and how it interacts with other nodes in a ROS 2 system.
+
+**Node Name**
+
+The node name is a unique identifier given to a ROS 2 node when it is launched.
+It is defined within the code of the Python script that creates the ROS 2 node.
+The node name is used to distinguish one node from another within a ROS 2 system.
+It's essential to ensure that node names are unique within a ROS 2 graph because it helps in identifying and communicating with specific nodes.
+
+**Executable Name**
+
+The executable name refers to the name of the binary file that is created when we build our ROS 2 package.
+In ROS 2, nodes are typically organized into packages, and each package can contain one or more nodes.
+When we build a ROS 2 package, it generates one or more executable files (binaries) that correspond to the nodes defined in that package.
+The executable name for a node is specified in the package's setup.py and should match the name of the node's source file without the file extension.
+
+These three names may or may not be the same, but they serve different purposes in ROS 2 development.
 
 ## Projects
 
