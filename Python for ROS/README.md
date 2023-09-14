@@ -4,6 +4,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li><a href="#Basic-Python-OOP">Basic Python OOP</a></li>
+    <li><a href="#Package-Module-Class">Package vs Module vs Class</a></li>
     <li><a href="#Python for ROS">Python for ROS</a></li>
   </ol>
 </details>
@@ -136,4 +137,66 @@ Where static do not pass anything. They are used when the actions performed by t
         pass
 ```
 
+## Package Module Class
+
+All these three help in structuring and organizing code.
+
+**Class**
+
+A class is a blueprint for creating objects (instances).
+It defines a set of attributes (variables) and methods (functions) that the objects created from the class will have.
+Classes are used for Object-Oriented Programming (OOP) and allow us to model real-world entities and their behavior.
+We can create instances of a class to work with its attributes and methods.
+
+```python
+class Dog:
+    def __init__(self, name):
+        self.name = name
+
+    def bark(self):
+        print(f"{self.name} says Woof!")
+
+my_dog = Dog("Buddy")
+my_dog.bark()  # Calls the 'bark' method of the 'Dog' class for 'my_dog' instance.
+```
+
+**Module**
+
+A module is a single Python file that contains variables, functions, and classes.
+It is used to organize related code into separate files, making it easier to manage and reuse code.
+Modules can be imported and used in other Python scripts to access their contents.
+
+```python
+# This is a module named 'my_module.py'
+def add(a, b):
+    return a + b
+
+def subtract(a, b):
+    return a - b
+
+# In another script, you can import and use functions from 'my_module.py'
+import my_module
+result = my_module.add(3, 2)
+```
+
+**Package**
+
+A package is a directory that contains a collection of Python modules and a special __init__.py file (which can be empty).
+It is used to organize related modules into a hierarchical directory structure.
+Packages allow you to group related functionality and create namespaces to avoid naming conflicts.
+To use modules within a package, you import them using dot notation.
+
+```python
+my_package/
+├── __init__.py
+├── module1.py
+└── module2.py
+```
+To use a class within the module module1.py of the package my_package,
+
+```python
+class my_package.module1 import class_name
+
+my_instance = my_class(attribute)
+```
 ## Python for ROS

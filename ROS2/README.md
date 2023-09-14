@@ -3,7 +3,7 @@
 <details open="open">
   <summary>Table of Contents</summary>
   <ol>
-    <li><a href="#CLI---tools">ROS Wiki</a></li>
+    <li><a href="#Concepts">Concepts</a></li>
     <ol>
         <li><a href="#Environment">Environment</a></li>
         <li><a href="#RQT-and-ROS2-tools">RQT and ROS2 tools</a></li>
@@ -48,42 +48,53 @@
 - [ ] Raspberry Pi
 - [ ] Linux
 
-## CLI - tools
+## Concepts
 
 ### Environment
 
 **Underlays and Overlays**
 
-The core ROS 2 workspace is called the underlay. Subsequent local workspaces are called overlays.
-In general, it is recommended to use an overlay when you plan to iterate on a small number of packages, rather than putting all of your packages into the same workspace.
-Packages in our overlay will override packages in the underlay. It’s also possible to have several layers of underlays and overlays, with each successive overlay using the packages of its parent underlays.
-Usually main ROS 2 installation will be the underlay which does not has to be every time.
+The core ROS 2 workspace is called the underlay. Subsequent local workspaces are called overlays.<br>
+In general, it is recommended to use an overlay when we plan to iterate on a small number of packages, rather than putting all of our packages into the same workspace.<br>
+Packages in our overlay will override packages in the underlay. It’s also possible to have several layers of underlays and overlays, with each successive overlay using the packages of its parent underlays.<br>
+Usually main ROS 2 installation will be the underlay which does not has to be every time.<br>
 
+A particular package may exist in an overlay and underlay for example, turtlesim package if installed from apt methods exists in main ROS2 environment, and is it is cloned from github into the workspace it exists in the overlay. If package exists in both lays overlay takes precedence over the underlay.<br>
+Modifications in the overlay do not affect packages in underlay.  
+
+**Sourcing**
 Without sourcing the setup files, we won’t be able to access ROS 2 commands, or find or use ROS 2 packages.
 
 Add this command to `.bashrc` file.
 ```python
 source /opt/ros/humble/setup.bash
 ```
-So that every time a new terminal session is initiated this command is executed and ROS 2 commands can be accessed. 
+So that every time a new terminal session is initiated this command is executed and ROS 2 commands can be accessed.<br>
+What we are actually doing is sourcing our main ROS2 environment as the “underlay”, so we can build the overlay “on top of” it.
+```python
+source ~/ros2_ws/install/local_setup.bash
+```
+This sources our overlay workspace.
 
+Sourcing the local_setup of the overlay will only add the packages available in the overlay to our environment. setup sources the overlay as well as the underlay it was created in, allowing us to utilize both workspaces.<br>
+So, sourcing our main ROS 2 installation’s setup and then the ros2_ws overlay’s local_setup, like we just did, is the same as just sourcing ros2_ws’s setup, because that includes the environment of its underlay.
 
-ROS 2 nodes on the same domain can freely discover and send messages to each other, while ROS 2 nodes on different domains cannot.
-To avoid interference between different groups of computers running ROS 2 on the same network, a different domain ID should be set for each group.
+**Domain**
+ROS 2 nodes on the same domain can freely discover and send messages to each other, while ROS 2 nodes on different domains cannot.<br>
+To avoid interference between different groups of computers running ROS 2 on the same network, a different domain ID should be set for each group.<br>
 
 The domain ID can be changed using
 ```python
 export ROS_DOMAIN_ID=<our_domain_id>
  ```
 
-By default, ROS 2 communication is not limited to localhost. ROS_LOCALHOST_ONLY environment variable allows us to limit ROS 2 communication to localhost only. This means our ROS 2 system, and its topics, services, and actions will not be visible to other computers on the local network.
+**Local Host**
+By default, ROS 2 communication is not limited to localhost. ROS_LOCALHOST_ONLY environment variable allows us to limit ROS 2 communication to localhost only. <br>
+This means our ROS 2 system, and its topics, services, and actions will not be visible to other computers on the local network.<br>
 
 ```python
 export ROS_LOCALHOST_ONLY=1
 ```
-
-
-IF any ROS2 package is not being located, the first thing we should do is check our environment variables and ensure they are set to the version and distro we intended.
 
 **Colcon**
 
@@ -91,19 +102,59 @@ We won’t be able to use the `sudo apt install ros-<distro>-<package>` command 
 
 Colcon is an iteration on the ROS build tools catkin_make.
 
-When colcon has completed building successfully, the output will be in the install directory. Before we can use any of the installed executables or libraries, we will need to add them to our path and library paths. colcon will have generated bash/bat files in the install directory to help set up the environment. These files will add all of the required elements to our path and library paths as well as provide any bash or shell commands exported by packages.
+When colcon has completed building successfully, the output will be in the install directory.<br>
+Before we can use any of the installed executables or libraries, we will need to add them to our path and library paths. Colcon will have generated bash/bat files in the install directory to help set up the environment. These files will add all of the required elements to our path and library paths as well as provide any bash or shell commands exported by packages.
 
-Colcon supports multiple build types. The recommended build types are ament_cmake and ament_python.
-ament_cmake is a build system package used for building packages written in C++ and using the CMake build system. 
-ament_python is a build system package used for building Python packages in the ROS 2 ecosystem.
+Colcon supports multiple build types. The recommended build types are ament_cmake and ament_python.<br>
+`ament_cmake` is a build system package used for building packages written in C++ and using the CMake build system. 
+`ament_python` is a build system package used for building Python packages in the ROS 2 ecosystem.<br>
 In python packages, setup.py is the primary entry point for building.
 
+Other useful arguments for colcon build:
+
+- `--packages-up-to` builds the package we want, plus all its dependencies, but not the whole workspace (saves time)
+- `--symlink-install` saves us from having to rebuild every time we tweak python scripts
+- `--event-handlers` console_direct+ shows console output while building (can otherwise be found in the log directory)
+
+The install directory is where our workspace’s setup files are, which we can use to source our overlay.
+
+**ROS dependencies**
 Packages developed may depend on other package for its operation, this can be verified using,
 From the root of our workspace,
+
 ```python
 rosdep install -i --from-path src --rosdistro humble -y
 ```
+
 Packages declare their dependencies in the package.xml file. This command walks through those declarations and installs the ones that are missing.
+
+**Package**
+
+Package creation in ROS 2 uses ament as its build system and colcon as its build tool.
+
+Minimal package contents:
+
+- package.xml file containing meta information about the package
+- resource/<package_name> marker file for the package
+- setup.cfg is required when a package has executables, so ros2 run can find them
+- setup.py containing instructions for how to install the package
+- <package_name> - a directory with the same name as your package, used by ROS 2 tools to find your package, contains __init__.py
+
+Nested packages ar not allowed.
+
+```python
+ros2 pkg create --build-type ament_python <package_name> --dependencies rclpy
+```
+
+To build a specific package,
+
+```python
+colcon build --packages-select <package_name>x
+```
+
+**Others**
+
+IF any ROS2 package is not being located, the first thing we should do is check our environment variables and ensure they are set to the version and distro we intended.
 
 ### RQT and ROS2 tools
 
