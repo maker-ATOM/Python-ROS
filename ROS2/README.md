@@ -16,6 +16,7 @@
         <li><a href="#ROSbag">ROSbag</a></li>
         <li><a href="#Script-Node-Executable-Name">Script vs Node vs Executable Name</a></li>
         <li><a href="#Custom-ROS-message">Custom ROS message</a></li>
+        <li><a href="#ros2doctor">ros2doctor</a></li>
     </ol>
     <li><a href="#Projects">Projects</a></li>
         <ol>
@@ -38,7 +39,7 @@
 - [ ] ROS wiki
     - [ ] Tutorials
         - [x] CLI Tools
-        - [ ] Client Libraries
+        - [x] Client Libraries
         - [ ] Intermediate
         - [ ] Advance
         - [ ] Demos
@@ -448,6 +449,17 @@ The process to do so to create a msg directory within the package and create a n
 ```python
 from package_name.msg import message_name
 ```
+
+### ros2doctor
+
+We can check ROS2 settings with the ros2doctor tool. ros2doctor checks all aspects of ROS 2, including platform, version, network, environment, running systems and more, and warns us about possible errors and reasons for issues.
+
+```python
+ros2 doctor --report
+```
+for full report.
+
+We can also examine running ROS2 system using doctor.
 
 ## Projects
 
