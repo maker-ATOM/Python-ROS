@@ -2,32 +2,32 @@
 This repository contains self learning and understanding of Robot Operating System.
 
 **Python for ROS**
-
+<br>
 Core python concepts with OOP in python.
 
 **ROS1**
-
+<br>
 Learnings of ROS1 (superficial).
 
 **ROS2**
-
+<br>
 Learnings of ROS2 (in depth).
 
 - ROS Wiki
 
 **pubsub**
-
+<br>
 Basic utilization of publisher subscriber model.
 
 - rclpy
 - Node class
 
 **srvcli**
-
+<br>
 Basic utilization of server client model.
 
 **node_parameters**
-
+<br>
 Implementation of node parameters. 
 
 ## Repository Structure
