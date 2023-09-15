@@ -15,6 +15,7 @@
         <li><a href="#Launch">Launch</a></li>
         <li><a href="#ROSbag">ROSbag</a></li>
         <li><a href="#Script-Node-Executable-Name">Script vs Node vs Executable Name</a></li>
+        <li><a href="#Custom-ROS-message">Custom ROS message</a></li>
     </ol>
     <li><a href="#Projects">Projects</a></li>
         <ol>
@@ -220,7 +221,6 @@ Each node in ROS should be responsible for a single, modular purpose, e.g. contr
 
 The ROS system architecture must be designed in a way so that each individual task of the robot can be executed by individual nodes.
 
-
 To run a executable,
 ```python
 ros2 run <package_name> <executable_name>
@@ -334,6 +334,11 @@ To start the same node using our saved parameter values, use:
 ros2 run <package_name> <executable_name> --ros-args --params-file <file_name>
 ```
 
+To see the description of parameters,
+```python
+ros2 param describe /node_name parameter_name
+```
+
 ### Actions
 Actions are one of the communication types in ROS 2 and are intended for long running tasks. They consist of three parts: a goal, feedback, and a result.
 
@@ -429,12 +434,27 @@ The executable name for a node is specified in the package's setup.py and should
 
 These three names may or may not be the same, but they serve different purposes in ROS 2 development.
 
+### Custom ROS message
+
+Custom ROS messages for topics and services can be created.
+
+It seems to be convenient to create teh custom message in the package it is going to be utilized but if in case the message is being is used by other packages and the latter package is dependent on the former package this can lead to cyclic dependencies which is not good.
+<br>Moreover having a single package to hold all the custom message for the robot is connivent that to store in individual packages that use them.
+
+As a conventional cmake packages are used to encapsulate custom messages.
+
+The process to do so to create a msg directory within the package and create a new file with .msg or .srv extension based upon usage for topic or services respectively. Build the project and use the message as we use the build in ones.
+
+```python
+from package_name.msg import message_name
+```
+
 ## Projects
 
 ### On going
 
 - Generation of custom ROS Services and Actions
-- Visulization of Path-Planning algorithms in Rviz
+- Visualization of Path-Planning algorithms in Rviz
  
 ### Completed
 

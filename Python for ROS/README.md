@@ -13,7 +13,6 @@
 
 - Data elements and functions associated to specific classes are called as attributes and methods.
 
-
 General class description.
 ```
 class joint:

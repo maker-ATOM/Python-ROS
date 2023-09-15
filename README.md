@@ -21,6 +21,9 @@ Basic utilization of publisher subscriber model.
 **srvcli**
 Basic utilization of server client model.
 
+**node_parameters**
+Implementation of node parameters. 
+
 ## Repository Structure
 ```python
 ├── pubsub
