@@ -43,7 +43,7 @@
         - [ ] Intermediate
         - [ ] Advance
         - [ ] Demos
-        - [ ] Miscellaneous
+        - ~~[ ] Miscellaneous~~
     - [ ] How to Guides
     - [ ] Concepts
 - [ ] Robotics Back-End
@@ -128,8 +128,30 @@ From the root of our workspace,
 ```python
 rosdep install -i --from-path src --rosdistro humble -y
 ```
+`rosdep` is a dependency management utility. It is a command-line utility for identifying and installing dependencies to build or install a package. rosdep is not a package manager in its own right; it is a meta-package manager that uses its own knowledge of the system and the dependencies to find the appropriate package to install on a particular platform. The actual installation is done using the system package manager (e.g. apt on Debian/Ubuntu, etc).
+
+rosdep check for keys(entity we mention within the tags) within the package.xml file. These keys are then cross-referenced against a central index to find the appropriate ROS package or software library in various package managers.
 
 Packages declare their dependencies in the package.xml file. This command walks through those declarations and installs the ones that are missing.
+
+Various tag are to define the level of dependencies within the package.xml file.
+
+<b>Depend</b>
+These are dependencies that should be provided at both build time and run time for our package.
+
+<b>build_depend</b>
+If we only use a particular dependency for building our package, and not at execution time.
+With this type of dependency, an installed binary of our package does not require that particular package to be installed.
+
+
+<b>build_export_depend</b>
+If we export a header that includes a header from a dependency, it will be needed by other packages that <build_depend> on ours.
+
+<b>exec_depend</b>
+This tag declares dependencies for shared libraries, executables, Python modules, launch scripts and other files required when running your package.
+
+<b>test_depend</b>
+This tag declares dependencies needed only by tests. Dependencies here should not be duplicated with keys specified by <build_depend>, <exec_depend>, or <depend>.
 
 **Package**
 
