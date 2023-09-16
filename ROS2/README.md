@@ -38,6 +38,8 @@
   <li><input type="checkbox" disabled> ede</li>
 </ul>
 
+<input type="checkbox" disabled> wdwwdwd
+
 - [x] ROS - Mecharithm
 - [ ] ROS wiki
     - [ ] Tutorials
