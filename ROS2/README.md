@@ -43,13 +43,14 @@
         - [ ] Intermediate
         - [ ] Advance
         - [ ] Demos
-        - ~~[ ] Miscellaneous~~
+~~<input type="checkbox" disabled>  Miscellaneous~~
     - [ ] How to Guides
     - [ ] Concepts
 - [ ] Robotics Back-End
 - [ ] The Construct
 - [ ] Raspberry Pi
 - [ ] Linux
+
 
 ## Concepts
 
