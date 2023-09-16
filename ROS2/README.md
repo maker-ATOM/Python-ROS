@@ -34,6 +34,9 @@
 
 **Learning Status**
 
+<ul>
+  <li><input type="checkbox" disabled> ede</li>
+</ul>
 
 - [x] ROS - Mecharithm
 - [ ] ROS wiki
