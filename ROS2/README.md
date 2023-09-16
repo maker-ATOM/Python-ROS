@@ -34,12 +34,6 @@
 
 **Learning Status**
 
-<ul>
-  <li><input type="checkbox" disabled> ede</li>
-</ul>
-
-<input type="checkbox" disabled> wdwwdwd
-
 - [x] ROS - Mecharithm
 - [ ] ROS wiki
     - [ ] Tutorials
@@ -48,7 +42,7 @@
         - [ ] Intermediate
         - [ ] Advance
         - [ ] Demos
-~~<input type="checkbox" disabled>  Miscellaneous~~
+        - [ ] ~~Miscellaneous~~
     - [ ] How to Guides
     - [ ] Concepts
 - [ ] Robotics Back-End
