@@ -36,15 +36,45 @@
 
 - [x] ROS - Mecharithm
 - [ ] ROS wiki
-    - [ ] Tutorials
-        - [x] CLI Tools
-        - [x] Client Libraries
-        - [ ] Intermediate
-        - [ ] Advance
-        - [ ] Demos
-        - [ ] ~~Miscellaneous~~
-    - [ ] How to Guides
-    - [ ] Concepts
+  - [ ] Tutorials
+    - [x] CLI Tools
+      -  Configuring environment
+      -  Using turtlesim, ros2, and rqt
+      -  Understanding nodes
+      -  Understanding topics
+      -  Understanding services
+      -  Understanding parameters
+      -  Understanding actions
+      -  Using rqt_console to view logs
+      -  Launching nodes
+      -  Recording and playing back data
+    - [x] Client Libraries
+      -  Using colcon to build packages
+      -  Creating a workspace
+      -  Creating a package
+      -  Writing a simple publisher and subscriber (Python)
+      -  Writing a simple service and client (Python)
+      -  Creating custom msg and srv files
+      -  Implementing custom interfaces
+      -  Using parameters in a class (Python)
+      -  Using ros2doctor to identify issues
+      -  Creating and using plugins (C++)
+    - [ ] Intermediate
+      -  Managing Dependencies with rosdep
+      -  Creating an action
+      -  Writing an action server and client (C++)
+      -  Writing an action server and client (Python)
+      -  Composing multiple nodes in a single process
+      -  Monitoring for parameter changes (C++)
+      -  Launch
+      -  tf2
+      -  Testing
+      -  URDF
+    - [ ] Advance
+    - [ ] Demos
+    - [ ] ~~Miscellaneous~~
+  - [ ] How to Guides
+  - [ ] Concepts
 - [ ] Robotics Back-End
 - [ ] The Construct
 - [ ] Raspberry Pi
@@ -148,7 +178,7 @@ With this type of dependency, an installed binary of our package does not requir
 If we export a header that includes a header from a dependency, it will be needed by other packages that <build_depend> on ours.
 
 <b>exec_depend</b>
-This tag declares dependencies for shared libraries, executables, Python modules, launch scripts and other files required when running your package.
+This tag declares dependencies for shared libraries, executables, Python modules, launch scripts and other files required when running our package.
 
 <b>test_depend</b>
 This tag declares dependencies needed only by tests. Dependencies here should not be duplicated with keys specified by <build_depend>, <exec_depend>, or <depend>.
@@ -163,7 +193,7 @@ Minimal package contents:
 - resource/<package_name> marker file for the package
 - setup.cfg is required when a package has executables, so ros2 run can find them
 - setup.py containing instructions for how to install the package
-- <package_name> - a directory with the same name as your package, used by ROS 2 tools to find your package, contains __init__.py
+- <package_name> - a directory with the same name as our package, used by ROS 2 tools to find our package, contains __init__.py
 
 Nested packages are not allowed.
 
@@ -362,6 +392,8 @@ To see the description of parameters,
 ros2 param describe /node_name parameter_name
 ```
 
+Often a node needs to respond to changes to its own parameters or another node’s parameters. The ParameterEventHandler class makes it easy to listen for parameter changes so that our code can respond to them.
+
 ### Actions
 Actions are one of the communication types in ROS 2 and are intended for long running tasks. They consist of three parts: a goal, feedback, and a result.
 
@@ -413,6 +445,21 @@ Launch files allow us to start up and configure a number of executables containi
 Running a single launch file with the ros2 launch command will start up our entire system - all nodes and their configurations - at once.
 
 Launch files can be written in Python, XML and YAML.
+
+The launch system in ROS 2 is responsible for helping the user describe the configuration of their system and then execute it as described. The configuration of the system includes what programs to run, where to run them, what arguments to pass them, and ROS-specific conventions which make it easy to reuse components throughout the system by giving them each a different configuration. It is also responsible for monitoring the state of the processes launched, and reporting and/or reacting to changes in the state of those processes.
+
+Each node launched through a launch files required package name, executable name and identification name at the minimal.
+
+**Substitutions**
+Substitutions are variables that are only evaluated during execution of the launch description and can be used to acquire specific information like a launch configuration, an environment variable, or to evaluate an arbitrary Python expression.
+
+**Event Handles**
+Launch files are also responsible for monitoring the state of processes it launched, as well as reporting and reacting to changes in the state of those processes. These changes are called events and can be handled by registering an event handler with the launch system. Event handlers can be registered for specific events and can be useful for monitoring the state of processes. Additionally, they can be used to define a complex set of rules which can be used to dynamically modify the launch file.
+
+**Launch File architecture**
+The system must be so designed that is can be reusable as possible.  This could be done by clustering related nodes and configurations into separate launch files. Afterwards, a top-level launch file dedicated to a specific configuration could be written. This would allow moving between identical robots to be done without changing the launch files at all. Even a change such as moving from a real robot to a simulated one can be done with only a few changes. Top-level launch files should be short, consist of includes to other files corresponding to subcomponents of the application, and commonly changed parameters. Writing launch files in the following manner makes it easy to swap out one piece of the system. However, there are cases when some nodes or launch files have to be launched separately due to performance and usage reasons.
+
+Unique namespaces allow the system to start two similar nodes without node name or topic name conflicts.
 
 ### ROSbag
 ros2 bag is a command line tool for recording data published on topics in our system. It accumulates the data passed on any number of topics and saves it in a database. We can then replay the data to reproduce the results of our tests and experiments. Recording topics is also a great way to share our work and allow others to recreate it.

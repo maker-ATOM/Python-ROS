@@ -1,45 +1,54 @@
 # ROS-Learnings
 This repository contains self learning and understanding of Robot Operating System.
 
-**Python for ROS**
-<br>
+## Python for ROS
+
 Core python concepts with OOP in python.
 
-**ROS1**
-<br>
+## ROS1
 Learnings of ROS1 (superficial).
 
-**ROS2**
-<br>
-Learnings of ROS2 (in depth).
+## ROS2
 
+Learnings of ROS2 (in depth).
+<br>
 - ROS Wiki
 
-**pubsub**
-<br>
-Basic utilization of publisher subscriber model.
+## pubsub
 
+Basic utilization of publisher subscriber model.
+<br>
 - rclpy
 - Node class
 
-**srvcli**
-<br>
+## srvcli
 Basic utilization of server client model.
 
-**node_parameters**
-<br>
+## node_parameters
+
 Implementation of node parameters. 
 
-**custom_interface**
-<br>
+## custom_interface
 Package for custom interfaces.
 
-**actionsrvcli**
-<br>
+## actionsrvcli
+
 Basic utilization of Action server client model.
 
 ## Repository Structure
 ```python
+├── Python for ROS
+│   ├── joint.py
+│   └── README.md
+│
+├── ROS1
+│   ├── Image
+│   └── README.md
+│
+├── ROS2
+│    ├── Images
+│    └── README.md
+│
 ├── pubsub
 │   ├── package.xml
 │   ├── pubsub
@@ -57,7 +66,6 @@ Basic utilization of Action server client model.
 │   └── srvcli
 │       ├── client.py
 │       └── server.py
-│
 │
 ├── node_parameters
 │   ├── launch
@@ -84,18 +92,6 @@ Basic utilization of Action server client model.
 │   ├── CMakeLists.txt
 │   ├── package.xml
 │   └── README.md
-│
-├── Python for ROS
-│   ├── joint.py
-│   └── README.md
-│
-├── ROS1
-│   ├── Image
-│   └── README.md
-│
-├── ROS2
-│    ├── Images
-│    └── README.md
 │
 └── README.md
 ```
