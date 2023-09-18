@@ -14,6 +14,7 @@
         <li><a href="#Actions">Actions</a></li>
         <li><a href="#Launch">Launch</a></li>
         <li><a href="#ROSbag">ROSbag</a></li>
+        <li><a href="#Transforms">Transforms</a></li>
         <li><a href="#Script-Node-Executable-Name">Script vs Node vs Executable Name</a></li>
         <li><a href="#Custom-ROS-message">Custom ROS message</a></li>
         <li><a href="#ros2doctor">ros2doctor</a></li>
@@ -283,6 +284,11 @@ The `node_name` and `executable_name` need not necessarily be same always.
 
 **Remapping** allows us to reassign default node properties, like node name, topic names, service names, etc., to custom values.
 
+To run a node while setting a specific parameter,
+```python
+ros2 run <package_name> <executable_name> --ros-args -p <parameter_nmae>:=<parameter_value>
+```
+
 ### Topics
 Topics are a vital element of the ROS graph that act as a bus for nodes to exchange messages.
 A node may publish data to any number of topics and simultaneously have subscriptions to any number of topics.
@@ -480,6 +486,59 @@ We also republish the data stored in the bag for introspection.
 ros2 bag play <file_name>
 ```
 
+## Transforms
+Publishing static transforms is useful to define the relationship between a robot base and its sensors or non-moving parts. When there no relative motion between the parts through operations of robot.
+
+Ideally to broadcast transforms we need not to create a script to do so, either we can use direct terminal to publish static transform,
+
+```python
+ros2 run tf2_ros static_transform_publisher --x x --y y --z z --qx qx --qy qy --qz qz --qw qw --frame-id frame_id --child-frame-id child_frame_id
+```
+
+or we use the `static_transform_publisher` executable provided by `tf2_ros` and run it through a launch file and providing the transform data through arguments,
+
+```python
+def generate_launch_description():
+    return LaunchDescription([
+        Node(
+            package='tf2_ros',
+            executable='static_transform_publisher',
+            arguments = ['--x', '0', '--y', '0', '--z', '1', '--yaw', '0', '--pitch', '0', '--roll', '0', '--frame-id', 'world', '--child-frame-id', 'mystaticturtle']
+        ),
+    ])
+```
+
+To visualize transform between frame_id and child_frame_id.
+
+```python
+ros2 run tf2_ros tf2_echo <frame_id> <child_frame_id>
+```
+When transforming from one frame to another, tf2 will take care of all the hidden intermediate frame transformations that are introduced.
+
+tf2 builds up a tree structure of frames and, thus, does not allow a closed loop in the frame structure. This means that a frame only has one single parent, but it can have multiple children.
+
+timeout argument which makes the lookup_transform wait for the specified transform for up to the specified duration before throwing an exception. This tool can be useful to listen for transforms that are published at varying rates or those incoming source with unreliable networking and non negligible latency.
+
+```python
+ros2 run tf2_tools view_frames
+```
+
+To get a graphical representation of tf tree
+
+```python
+ros2 run tf2_ros tf2_monitor turtle2 turtle1
+```
+
+Another tool to monitor transform between two frames.
+
+**Quaternions**
+ROS 2 uses quaternions to track and apply rotations. A quaternion has 4 components (x, y, z, w). In ROS 2, w is last.
+
+The magnitude of a quaternion should always be one and hence should be normalized, using `normalize()`
+
+To apply the rotation of one quaternion to a pose, simply multiply the previous quaternion of the pose by the quaternion representing the desired rotation. The order of this multiplication matters.
+
+An easy way to invert a quaternion is to negate the w-component.
 ### Script Node Executable Name
 
 **Python Script Name**
