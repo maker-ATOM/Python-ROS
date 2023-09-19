@@ -60,7 +60,7 @@
       -  Using parameters in a class (Python)
       -  Using ros2doctor to identify issues
       -  Creating and using plugins (C++)
-    - [ ] Intermediate
+    - [x] Intermediate
       -  Managing Dependencies with rosdep
       -  Creating an action
       -  Writing an action server and client (C++)
