@@ -9,9 +9,23 @@
   </ol>
 </details>
 
+- Tick: ✓ or &#x2713; or &#10003;
+- Cross: ✗ or &#x2717; or &#10007;
+
+```
+- Tick: ✓ or &#x2713; or &#10003;
+- Cross: ✗ or &#x2717; or &#10007;
+```
+
+```
+data = 'Robot Structure'
+```
+
 ## Basic python OOP
 
-- Data elements and functions associated to specific classes are called as attributes and methods.
+Data elements and functions associated to specific classes are called as attributes and methods.
+  
+Every value is an object. Whether it be a dictionary, a list, or even an integer, they are all objects. Programs manipulate those objects either by performing computation with them or by asking them to perform methods. Every object has state that is the value it holds and a collection of methods that it can perform.  The state of an object represents those things that the object knows about itself. The state is stored in instance variables.
 
 General class description.
 ```
