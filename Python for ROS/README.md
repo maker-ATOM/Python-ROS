@@ -4,8 +4,6 @@
   <summary>Table of Contents</summary>
   <ol>
     <li><a href="#Python-Tricks">Python Tricks</a></li>
-    <li><a href="#Strings">Strings</a></li>
-    <li><a href="#Numerics">Numerics</a></li>
     <li><a href="#data-structures">Data Structures</a></li>
     <li><a href="#Control-Logic">Control logic</a></li>
     <li><a href="#Tests">Tests</a></li>
@@ -16,15 +14,141 @@
   </ol>
 </details>
 
-<!-- - Tick: ✓ or &#x2713; or &#10003;
-- Cross: ✗ or &#x2717; or &#10007; -->
-
-<!-- ```
-- Tick: ✓ or &#x2713; or &#10003;
-- Cross: ✗ or &#x2717; or &#10007;
-``` -->
 
 
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
 
 beginner 9
 pip
@@ -64,7 +188,10 @@ help(class) => description of class
 help(method) => description of method
 ```
 
-## Strings
+
+
+
+## Data Structures
 
 ```python
 ✓ data = 'Robot Structure'
@@ -104,11 +231,9 @@ name = 'Aditya'
 ✓ message = greeting + ', ' + name + '.Welcome!'
 ✓ message = '{}, {}. Welcome!'.format(greeting, name) => placeholders
 ✓ message = f'{greeting}, {name}. Welcome!' => fstrings
-```
 
-## Numerics
+---
 
-```python
 Arithmetic Operators:
 Addition:       3 + 2
 Subtraction:    3 - 2
@@ -129,14 +254,10 @@ Less or Equal:    3 <= 2
 abs()
 round()
 int() => typecast
-```
 
-## Data Structures
+---
 
-```python
 list[]
-tuple()
-set{}
 
 list.append()
 list.extend()
@@ -156,12 +277,18 @@ list1.insert(n, list2) != list1.extend(list2)
 list_str = ', '.join(list) => conversion of list to string
 list = list_str.split(" ") => split on space
 
+---
+
+set{}
+
 set.intersection()
 set.difference()
 set.union()
 
 ✗ set = {} => creates a dict
 ✓ set = set()
+
+---
 
 dict.update({dict2})
 del dict.[key]
@@ -243,7 +370,16 @@ When a particular error (run-time) occurs when we handle it by performing dedica
 
 Moreover our script also can raise exceptions if necessary.
 
-## Basic python OOP
+```python
+try:
+    pass
+except <exception>:
+    pass
+finally:
+    pass
+```
+
+## OOP
 
 Data elements and functions associated to specific classes are called as attributes and methods.
 
