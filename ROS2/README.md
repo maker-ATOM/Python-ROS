@@ -91,12 +91,14 @@
 The core ROS 2 workspace is called the underlay. Subsequent local workspaces are called overlays.<br>
 In general, it is recommended to use an overlay when we plan to iterate on a small number of packages, rather than putting all of our packages into the same workspace.<br>
 Packages in our overlay will override packages in the underlay. It’s also possible to have several layers of underlays and overlays, with each successive overlay using the packages of its parent underlays.<br>
+Overriding means when we run a command like ros2 run or ros2 launch, it looks for the package and executable in the currently active workspace first (overlay), and if it's not found there, it looks in the underlaying workspaces.
 Usually main ROS 2 installation will be the underlay which does not has to be every time.<br>
 
 A particular package may exist in an overlay and underlay for example, turtlesim package if installed from apt methods exists in main ROS2 environment, and is it is cloned from github into the workspace it exists in the overlay. If package exists in both lays overlay takes precedence over the underlay.<br>
 Modifications in the overlay do not affect packages in underlay.  
 
 **Sourcing**
+
 Without sourcing the setup files, we won’t be able to access ROS 2 commands, or find or use ROS 2 packages.
 
 Add this command to `.bashrc` file.
@@ -114,6 +116,7 @@ Sourcing the local_setup of the overlay will only add the packages available in 
 So, sourcing our main ROS 2 installation’s setup and then the ros2_ws overlay’s local_setup, like we just did, is the same as just sourcing ros2_ws’s setup, because that includes the environment of its underlay.
 
 **Domain**
+
 ROS 2 nodes on the same domain can freely discover and send messages to each other, while ROS 2 nodes on different domains cannot.<br>
 To avoid interference between different groups of computers running ROS 2 on the same network, a different domain ID should be set for each group.<br>
 
@@ -123,6 +126,7 @@ export ROS_DOMAIN_ID=<our_domain_id>
  ```
 
 **Local Host**
+
 By default, ROS 2 communication is not limited to localhost. ROS_LOCALHOST_ONLY environment variable allows us to limit ROS 2 communication to localhost only. <br>
 This means our ROS 2 system, and its topics, services, and actions will not be visible to other computers on the local network.<br>
 
@@ -153,6 +157,7 @@ Other useful arguments for colcon build:
 The install directory is where our workspace’s setup files are, which we can use to source our overlay.
 
 **ROS dependencies**
+
 Packages developed may depend on other package for its operation, this can be verified using,
 From the root of our workspace,
 
