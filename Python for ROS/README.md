@@ -17,7 +17,7 @@
   </ol>
 </details>
 
-[Resource](https://www.youtube.com/playlist?list=PL-osiE80TeTt2d9bfVyTiXJA-UTHn6WwU)
+<!-- [Resource](https://www.youtube.com/playlist?list=PL-osiE80TeTt2d9bfVyTiXJA-UTHn6WwU) -->
 
 
 **Variable scope**
@@ -38,7 +38,7 @@ but globals cannot access locals
 nonlocal => allows to use variable from enclosing function
 ```
 
-**lamda Function**
+**Lamda Function**
 
 ```python
 
@@ -65,7 +65,7 @@ Check if the attribute exists before calling.
 Do not check before calling, call it, if it does exist then handle it using Exception.
 ```
 
-**_if _name__ == '__main__'**
+**If _name__ == '__main__'**
 
 ```python
 To check a file is executed directly by python is being imported.
@@ -85,13 +85,13 @@ Python decorators provide a way to modify or extend the behavior of functions or
 Decorators are functions that wrap other functions to extend their behavior transparently.
 ```
 
-**json**
+**Json**
 
 ```python
 Data format to store data and also to store config data.
 ```
 
-**regex**
+**Regex**
 
 ```python
 Help to match specific pattern in text.
@@ -110,7 +110,7 @@ The next value of iterator is received through next method.
 we can also add these method to our own class and make the objects iterables.
 ```
 
-**context manger**
+**Context manger**
 
 ```python
 Manage resource efficiently.
