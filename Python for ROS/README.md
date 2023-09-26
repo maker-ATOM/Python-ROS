@@ -22,10 +22,11 @@
 
 **Variable scope**
 
-First it is checks if the variable is present in the local scope of not then checks if it is available in enclosing scope and if not then in global or else throws a error.
-
-
 ```python
+First it is checks if the variable is present in the local scope rf not
+then checks if it is available in enclosing scope and 
+if not then in global or else throws a error.
+
 Local => Defined within function
 Enclosing => Function within a function 
 Global => Top level of module
@@ -39,37 +40,62 @@ nonlocal => allows to use variable from enclosing function
 
 **lamda Function**
 
+```python
+
+```
+
 **Duck Typing (Pythonic)**
 
-An object if cn walk like a duck and quack like a duck then it is a duck, that is we do not care what type of object we are working with if the object can do what we ask it to do.
+```python
+An object if cn walk like a duck and quack like a duck then it is a duck,
+that is we do not care what type of object we are working with 
+if the object can do what we ask it to do.
+
+```
 
 **Look before you leap (Non-Pythonic)**
 
+```python
 Check if the attribute exists before calling.
+```
 
 **Easier to ask for forgiveness than permission (Pythonic)**
 
+```python
 Do not check before calling, call it, if it does exist then handle it using Exception.
+```
 
 **_if _name__ == '__main__'**
 
+```python
 To check a file is executed directly by python is being imported.
+```
 
 **Generators**
 
-Do not hold the complete value in memory. Generates the result when the called one by one. Does not performs the operation until the result is being used.
+```python
+Do not hold the complete value in memory. Generates the result when the called one by one. 
+Does not performs the operation until the result is being used.
+```
 
 **Decorators**
 
-Python decorators provide a way to modify or extend the behavior of functions or methods without modifying the underlying function's code. Decorators are functions that wrap other functions to extend their behavior transparently.
+```python
+Python decorators provide a way to modify or extend the behavior of functions or methods without modifying the underlying function's code. 
+Decorators are functions that wrap other functions to extend their behavior transparently.
+```
 
 **json**
 
+```python
 Data format to store data and also to store config data.
+```
 
 **regex**
 
+```python
 Help to match specific pattern in text.
+```
 
 **Iterable**
 
@@ -77,18 +103,24 @@ Help to match specific pattern in text.
 Something that can be looped over.
 If something is iterable then a special method __iter__ is associated with the object
 
-list is not a iterator but is iterable that is, when the __iter__ method is executed on list it returns a iterator, iterator is object with an state so that it remember its state during iteration. The next value of iterator is received through next method.
+list is not a iterator but is iterable that is, when the __iter__ method is executed on list it returns a iterator, 
+iterator is object with an state so that it remember its state during iteration. 
+The next value of iterator is received through next method.
 
 we can also add these method to our own class and make the objects iterables.
 ```
 
 **context manger**
 
+```python
 Manage resource efficiently.
+```
 
 **Unpacking**
 
+```python
 a, b = (1, 2)
+```
 
 ## Data Structures
 
@@ -137,7 +169,9 @@ repr()
 The goal of __repr__ is to be unambiguous (returns a executable data format)
 The goal of __str__ is to be readable
 
----
+```
+
+```python
 
 abs()
 round()
@@ -145,7 +179,9 @@ int() => typecast
 
 1000000000000 is same as 1_000_000_000_000 => for readability
 
----
+```
+
+```python
 
 list[]
 
@@ -208,8 +244,9 @@ zip(list1, list2, ...) => creates a tuple of items
 for element1, element2 in zip(list1, list2): => to use two list at a time 
     print(element1, element2)
 
+```
 
----
+```python
 
 set{} => no duplicates
 
@@ -226,7 +263,9 @@ set.discard() => does not throw error
 ✗ set = {} => creates a dict
 ✓ set = set()
 
----
+```
+
+```python
 
 dict.update({dict2})
 del dict.[key]
@@ -248,7 +287,9 @@ for key in dict:
 for key, value in dict.items():
     pass
 
----
+```
+
+```python
 
 color =(55,255,255) => regular tuple
 
