@@ -3,193 +3,92 @@
 <details open="open">
   <summary>Table of Contents</summary>
   <ol>
-    <li><a href="#Python-Tricks">Python Tricks</a></li>
-    <li><a href="#data-structures">Data Structures</a></li>
+    <li><a href="#Data-Structures">Data Structures</a></li>
     <li><a href="#Control-Logic">Control logic</a></li>
     <li><a href="#Tests">Tests</a></li>
     <li><a href="#Exceptions">Exceptions</a></li>
-    <li><a href="#Basic-Python-OOP">Basic Python OOP</a></li>
+    <li><a href="#OOP">OOP</a></li>
     <li><a href="#Package-Module-Class">Package vs Module vs Class</a></li>
-    <li><a href="#Python for ROS">Python for ROS</a></li>
+    <li><a href="#PIP">PIP</a></li>
+    <li><a href="#OS">OS</a></li>
+    <li><a href="#Thread">Thread</a></li>
+    <li><a href="#MutliProcessing">MutliProcessing</a></li>
+    <li><a href="#GPT">GPT</a></li>
   </ol>
 </details>
 
+[Resource](https://www.youtube.com/playlist?list=PL-osiE80TeTt2d9bfVyTiXJA-UTHn6WwU)
 
 
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145
+**Variable scope**
 
-beginner 9
-pip
-vm
-var scope
-sclice
-comrehension
-sort
-string formatting
-os mod
-automate
-rand
-csv
-regex
-try execopt
-duck
-fstring
-generators
-decorators
-nametuple
-oop
-resources
-str vs repr
-if name = main
-unit testing
-else on loop
-set
-iterables
+First it is checks if the variable is present in the local scope of not then checks if it is available in enclosing scope and if not then in global or else throws a error.
 
-
-
-## Python tricks
 
 ```python
-dir(object) => methods available with the object
-help(class) => description of class
-help(method) => description of method
+Local => Defined within function
+Enclosing => Function within a function 
+Global => Top level of module
+Build-in => Predefined within python
+
+locals can access global stuff
+but globals cannot access locals
+
+nonlocal => allows to use variable from enclosing function
 ```
 
+**lamda Function**
 
+**Duck Typing (Pythonic)**
 
+An object if cn walk like a duck and quack like a duck then it is a duck, that is we do not care what type of object we are working with if the object can do what we ask it to do.
+
+**Look before you leap (Non-Pythonic)**
+
+Check if the attribute exists before calling.
+
+**Easier to ask for forgiveness than permission (Pythonic)**
+
+Do not check before calling, call it, if it does exist then handle it using Exception.
+
+**_if _name__ == '__main__'**
+
+To check a file is executed directly by python is being imported.
+
+**Generators**
+
+Do not hold the complete value in memory. Generates the result when the called one by one. Does not performs the operation until the result is being used.
+
+**Decorators**
+
+Python decorators provide a way to modify or extend the behavior of functions or methods without modifying the underlying function's code. Decorators are functions that wrap other functions to extend their behavior transparently.
+
+**json**
+
+Data format to store data and also to store config data.
+
+**regex**
+
+Help to match specific pattern in text.
+
+**Iterable**
+
+```python
+Something that can be looped over.
+If something is iterable then a special method __iter__ is associated with the object
+
+list is not a iterator but is iterable that is, when the __iter__ method is executed on list it returns a iterator, iterator is object with an state so that it remember its state during iteration. The next value of iterator is received through next method.
+
+we can also add these method to our own class and make the objects iterables.
+```
+
+**context manger**
+
+Manage resource efficiently.
+
+**Unpacking**
+
+a, b = (1, 2)
 
 ## Data Structures
 
@@ -232,28 +131,19 @@ name = 'Aditya'
 ✓ message = '{}, {}. Welcome!'.format(greeting, name) => placeholders
 ✓ message = f'{greeting}, {name}. Welcome!' => fstrings
 
+str()
+repr()
+
+The goal of __repr__ is to be unambiguous (returns a executable data format)
+The goal of __str__ is to be readable
+
 ---
-
-Arithmetic Operators:
-Addition:       3 + 2
-Subtraction:    3 - 2
-Multiplication: 3 * 2
-Division:       3 / 2
-Floor Division: 3 // 2
-Exponent:       3 ** 2
-Modulus:        3 % 2
-
-Comparisons:
-Equal:            3 == 2
-Not Equal:        3 != 2
-Greater Than:     3 > 2
-Less Than:        3 < 2
-Greater or Equal: 3 >= 2
-Less or Equal:    3 <= 2
 
 abs()
 round()
 int() => typecast
+
+1000000000000 is same as 1_000_000_000_000 => for readability
 
 ---
 
@@ -265,25 +155,73 @@ list.insert()
 list.remove()
 list.pop()
 list.sort()
+sorted(list, key) => key is used when list elements are object which have attributes associated.
 list.reverse()
 list.index()
-enumerate(list)
+
+for index, element in enumerate(list):
+    print(index, element)
 
 ✓ list[n-1] == list[-1]
-
 list[start(inclusive): end(exclusive): step] => slicing
 list[:] => shallow copy
+
 list1.insert(n, list2) != list1.extend(list2)
 list_str = ', '.join(list) => conversion of list to string
 list = list_str.split(" ") => split on space
 
+List Comprehension
+
+nums = [1,2,3,4,5,6,7,8,9,10]
+
+# I want 'n' for each 'n' in nums
+my_list = []
+for n in nums:
+  my_list.append(n)
+
+same as
+
+my_list = [n for n in nums]
+
+# I want 'n' for each 'n' in nums if 'n' is even
+my_list = []
+for n in nums:
+  if n%2 == 0:
+    my_list.append(n)
+
+same as 
+
+my_list = [n for n in nums if n%2 ==0
+
+# I want a (letter, num) pair for each letter in 'abcd' and each number in '0123'
+my_list = []
+for letter in 'abcd':
+  for num in range(4):
+    my_list.append((letter,num))]
+
+same as
+
+mu_list = [(letter, num) for letter in 'abcd' for num in range(4)]
+
+zip(list1, list2, ...) => creates a tuple of items
+
+for element1, element2 in zip(list1, list2): => to use two list at a time 
+    print(element1, element2)
+
+
 ---
 
-set{}
+set{} => no duplicates
 
 set.intersection()
 set.difference()
 set.union()
+
+set.add(int)
+set.update(list or set)
+
+set.remove() => throws a error if we try remove a value that does not exist
+set.discard() => does not throw error
 
 ✗ set = {} => creates a dict
 ✓ set = set()
@@ -296,6 +234,8 @@ student.pop[key]
 dict.values()
 dict.key()
 
+sorted(dict) => sorts key
+
 dict[key] => throws error if key is not present
 dict.get(key) => returns if key is not present
 
@@ -307,13 +247,31 @@ for key in dict:
 
 for key, value in dict.items():
     pass
+
+---
+
+color =(55,255,255) => regular tuple
+
+Color = namedtuple('Color', ['red', 'green', 'blue']) => namedtuple
+color = Color(55,155,255)
+another_color = Color(0,77,145)
+print(color.red)
+
+Mid way between tuple and dict
+---
+
+prefer secrets module instead of random module
 ```
 
 ## Control Logic
 
 ```python
+
+condition = False
+x = 1 if condition else 0 => ternary conditions
+
 Equality: ==
-Identity: is (checks id)
+Identity: is (checks id(memory address of the object))  
 
 False Values:
     False
@@ -327,6 +285,16 @@ for item in list:
 
 continue => loop to next iteration without executing below statements
 break => break the loop
+
+Else clause loop
+
+for i in list:
+    print i
+else:
+    print("Else Clause")
+
+Executes when all the iterations of the for are executed. Used in conjugation with `break`.
+
 ```
 
 ## Tests
@@ -398,6 +366,12 @@ class joint:
 Instance of an class.
 ```python
 linear = joint()
+```
+
+```python
+dir(object) => methods available with the object
+help(class) => description of class
+help(method) => description of method
 ```
 
 ```python
@@ -495,6 +469,7 @@ print(<instance_of_the_class>)
 ```
 
 To create a class method we simply need to use a decorator. Decorator are tool used to modify the behavior of a function or a class.
+
 Convention to use class variable as cls.
 The decorator needs to be used with every class method created
 ```python
@@ -600,3 +575,53 @@ class my_package.module1 import class_name
 
 my_instance = my_class(attribute)
 ```
+
+## PIP
+
+Python Package Manager
+
+```python
+pip help
+
+pip search <package_name>
+pip install <package_name>
+pip list
+
+pip freeze > requirements.txt => store the package list in a file
+pip install -r requirements.txt => install all packages within the list
+
+pipenc = pip + virtual env
+```
+
+## OS
+
+```python
+os.getcwd()
+os.chdir(path)
+os.listdir()
+os.mkdir()
+os.makedirs()
+
+os.stat(file)
+os.walk()
+os.environ.get()
+os.path.join()
+```
+
+## Threads
+
+```python
+Running different task concurrently.
+
+t1 = threading.thread(target=<function_to_be_executed>) => creates a object 
+t1.start() => starts the process
+```
+
+## MultiProcessing
+
+```python
+Task running in parallel
+```
+
+## GPT
+
