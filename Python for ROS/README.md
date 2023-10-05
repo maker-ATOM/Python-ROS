@@ -81,12 +81,14 @@ Does not performs the operation until the result is being used.
 **Decorators**
 
 ```python
-Python decorators provide a way to modify or extend the behavior of functions or methods without modifying the underlying function's code. 
+Python decorators provide a way to modify or extend the behavior of functions or 
+methods without modifying the underlying function's code. 
 Decorators are functions that wrap other functions to extend their behavior transparently.
 ```
 
 **Json**
 
+    <li><a href="#Recursion">Recursion</a></li>
 ```python
 Data format to store data and also to store config data.
 ```
@@ -97,6 +99,7 @@ Data format to store data and also to store config data.
 Help to match specific pattern in text.
 ```
 
+    <li><a href="#Recursion">Recursion</a></li>
 **Iterable**
 
 ```python
@@ -122,9 +125,20 @@ Manage resource efficiently.
 a, b = (1, 2)
 ```
 
+**Recursion**
+
+```python
+A recursive function is a function that calls itself.
+Used to solve problems that can be broken down into smaller more manageable sub-problems.
+
+All recursive function have a base case which acts as termination for the recursion.
+```
+
 ## Data Structures
 
 ```python
+p, q = q, p => valid swapping without need of temp variable.
+
 ✓ data = 'Robot Structure'
 ✗ data = 'Robot's structure'
 ✓ data = 'Robot\'s structure' => escape character
@@ -142,6 +156,7 @@ Escape sequences:
 \n => new line
 \\ => backslash
 \' =>single quotes
+    <li><a href="#Recursion">Recursion</a></li>
 
 Methods:
 data.upper() => coverts to uppercase
@@ -163,6 +178,7 @@ name = 'Aditya'
 ✓ message = '{}, {}. Welcome!'.format(greeting, name) => placeholders
 ✓ message = f'{greeting}, {name}. Welcome!' => fstrings
 
+    <li><a href="#Recursion">Recursion</a></li>
 str()
 repr()
 
@@ -172,6 +188,7 @@ The goal of __str__ is to be readable
 ```
 
 ```python
+    <li><a href="#Recursion">Recursion</a></li>
 
 abs()
 round()
@@ -183,6 +200,7 @@ int() => typecast
 
 ```python
 
+    <li><a href="#Recursion">Recursion</a></li>
 list[]
 
 list.append()
@@ -244,6 +262,8 @@ zip(list1, list2, ...) => creates a tuple of items
 for element1, element2 in zip(list1, list2): => to use two list at a time 
     print(element1, element2)
 
+visited = [False] * 5 <same as > visited = [False for _ in range(5)]
+
 ```
 
 ```python
@@ -304,9 +324,41 @@ Mid way between tuple and dict
 prefer secrets module instead of random module
 ```
 
+Double Ended Queue
+
+```python
+from collections import deque 
+container = deque()
+
+container.append(num)
+container.appendleft(num)
+container.pop()
+container.popleft()
+container.len()
+container.index(num, beg, end):- This function returns the first index of num, starting searching from beg till end index.
+container.insert(i, a) :- This function inserts a at index(i).
+container.remove(num):- This function removes the first occurrence num.
+container.count(num):- This function counts the number of occurrences of ele.
+
+Supports positive and negative indexing
+```
+
+```python
+stack = []
+stack.append(num)
+stack.pop()
+
+from collections import deque
+stack = deque() 
+stack.append(num)
+stack.pop()
+```
+
 ## Control Logic
 
 ```python
+if a <= b <= c: => valid range checker
+    pass
 
 condition = False
 x = 1 if condition else 0 => ternary conditions
@@ -421,7 +473,8 @@ print(linear)
 ```
 
 - __init__ method is used to initialize the instances of the class. Similar to constructors.
-- In python when ever a method is called by an instance of the class it is passed as an argument to the method. By convention we call it `self`.
+- In python when ever a method is called by an instance of the class it is passed as an argument to the method. 
+  By convention we call it `self`.
 
 - We do not need to pass the instance which is calling the method as an argument, it is taken care by the interpreter.
 ```python
