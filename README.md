@@ -1,4 +1,11 @@
 # ROS-Learnings
+
+<font size="5">This text has a larger font size.</font>
+
+<span style="font-size: 20px;">This text has a font size of 20px.</span>
+
+<span style="font-size: 20px;">This text has a font size of 20px.</span>
+
 This repository contains self learning and understanding of Robot Operating System.
 
 **Note**: pubsub, srvcli, node_parameters, custom_interface, actionsrvcli, tf2_tutorial are ROS2 packages and custom_interface contains custom rosmsg to represent a  Adjacency list used in project <a href="https://github.com/maker-ATOM/Path-Planning-Algorithms">Path-Planning-Algorithms</a>
