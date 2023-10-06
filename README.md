@@ -1,36 +1,38 @@
 # ROS-Learnings
 This repository contains self learning and understanding of Robot Operating System.
 
-### Python for ROS
+**Note**: pubsub, srvcli, node_parameters, custom_interface, actionsrvcli, tf2_tutorial are ROS2 packages and custom_interface contains custom ros rosmsg to represent a  Adjacency list used in project <a href="[url](https://github.com/maker-ATOM/Path-Planning-Algorithms)">Path-Planning-Algorithms</a>
+
+<h3>Python for ROS</h3>
 Core python concepts with OOP in python.
 
-### ROS1
+<h3>ROS1</h3>
 Learnings of ROS1 (superficial).
 
-### ROS2
+<h3>ROS2</h3>
 Learnings of ROS2 (in depth).
 <br>
 - ROS Wiki
 
-### pubsub
+<h3>pubsub</h3>
 Basic utilization of publisher subscriber model.
 <br>
 - rclpy
 - Node class
 
-### srvcli
+<h3>srvcli</h3>
 Basic utilization of server client model.
 
-### node_parameters
+<h3>node_parameters</h3>
 Implementation of node parameters. 
 
-### custom_interface
+<h3>custom_interface</h3>
 Package for custom interfaces.
 
-### actionsrvcli
+<h3>actionsrvcli</h3>
 Basic utilization of Action server client model.
 
-### tf2_tutorial
+<h3>tf2_tutorial</h3>
 Usage of tf2 to broadcast and listen transforms.
 
 ### Repository Structure
