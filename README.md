@@ -1,10 +1,10 @@
 # ROS-Learnings
 
-<font size="5">This text has a larger font size.</font>
+<!-- <font size="5">This text has a larger font size.</font>
 
 <span style="font-size: 20px;">This text has a font size of 20px.</span>
 
-<span style="font-size: 20px;">This text has a font size of 20px.</span>
+<span style="font-size: 20px;">This text has a font size of 20px.</span> -->
 
 This repository contains self learning and understanding of Robot Operating System.
 
