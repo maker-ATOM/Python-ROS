@@ -133,6 +133,9 @@ Used to solve problems that can be broken down into smaller more manageable sub-
 
 All recursive function have a base case which acts as termination for the recursion.
 ```
+**Context Managers**
+
+Facilitate the proper handling of resources. 
 
 ## Data Structures
 
@@ -704,18 +707,47 @@ os.path.join()
 
 ## Threads
 
-```python
-Running different task concurrently.
+Thread: separate flow of execution. 
 
+They appear to run at same time but for python3 threads are executed concurrently. Interaction of CPython with Python Global Interpreter (GIL) Lock limits one Python thread to run at a time. If threads are written in C they have the ability to release the GIL and run concurrently.
+
+> concurrency is about dealing with lots of things at once but parallelism is about doing lots of things at once
+
+
+```python
 t1 = threading.thread(target=<function_to_be_executed>) => creates a object 
 t1.start() => starts the process
+t1.join() => waits for the threads to be complete before moving forward.
 ```
+
+A daemon thread will shut down immediately when the program exits.
+
+Once a program has completed its main execution part the shutdown process check for any non-daemonic process to end before completely terminating.
+
+The main part of the program is also considered as a thread.
+
+**ThreadPoolExecutor**
+
+Easier way to start a group of threads.
+
+The scheduling of threads is done by the operating system and does not follow a plan.
+
+**CPU vs IO bound tasks**
+
+CPU-bound programs are those that are pushing the CPU to its limit. This includes programs that do mathematical computations like matrix multiplications, searching, image processing, etc.
+
+I/O-bound programs are the ones that spend time waiting for Input/Output which can come from a user, file, database, network, etc. I/O-bound programs sometimes have to wait for a significant amount of time till they get what they need from the source due to the fact that the source may need to do its own processing before the input/output is ready, for example, a user thinking about what to enter into an input prompt or a database query running in its own process.
+
+Hence threading on python are not effective for CPU-bound tasks.
+
+**Race Condition**
+
+Race conditions can occur when two or more threads access a shared piece of data or resource.
 
 ## MultiProcessing
 
-```python
-Task running in parallel
-```
+Task running in parallel,
+Comes with extra overhead
 
 ## GPT
 
