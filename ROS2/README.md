@@ -217,6 +217,22 @@ colcon build --packages-select <package_name>x
 
 IF any ROS2 package is not being located, the first thing we should do is check our environment variables and ensure they are set to the version and distro we intended.
 
+**Spins**
+
+When a node is spun it executes all the callbacks within the callback queue. These callbacks are generally associated to topic subscription, timers or service methods. Every time a event is triggered (data is published on the topic, timer has expired or server has responded) the associated callback is enqueued in the callback queue. These methods are then executed sequentially dequeuing one method at a time.
+
+The data associated to the callback method is bound with it once it is enqueued in the callback queue.
+
+For the callbacks to work concurrently each callback should be assigned a thread which be executed in case of other callback method is yet to triggered.
+
+So if in a script multiple nodes are created we use independent objects and spins them independently.
+
+Threading is beneficial when performing task of node in single script, where callbacks of each nodes are assigned a different thread, but usually this not observed because each node is assigned a different script as a design practice.
+
+Moreover callbacks of single node are not executed in multi-thread fashion because firstly all the methods are generally CPU-bound and the sequence of execution is handled using queue maintained by the spin entity of `rclpy`. 
+
+[Multi-threading](https://github.com/BruceChanJianLe/ros-multithreading)
+
 ### RQT and ROS2 tools
 
 rqt is a graphical user interface (GUI) tool for ROS 2. Everything done in rqt can be done on the command line, but rqt provides a more user-friendly way to manipulate ROS 2 elements.
@@ -598,7 +614,6 @@ We can also examine running ROS2 system using doctor.
 
 ### On going
 
-- Generation of custom ROS Services and Actions
 - Visualization of Path-Planning algorithms in Rviz
  
 ### Completed

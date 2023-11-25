@@ -137,6 +137,10 @@ All recursive function have a base case which acts as termination for the recurs
 
 Facilitate the proper handling of resources. 
 
+**Sentinel**
+
+A character used to indicate the beginning or end of a particular block of information
+
 ## Data Structures
 
 ```python
@@ -743,6 +747,18 @@ Hence threading on python are not effective for CPU-bound tasks.
 **Race Condition**
 
 Race conditions can occur when two or more threads access a shared piece of data or resource.
+
+To avoid race conditions we use locks or **MuTex**, Mutual Exclusion.
+
+A Lock is an object that acts like a hall pass. Only one thread at a time can have the Lock. Any other thread that wants the Lock must wait until the owner of the Lock gives it up.
+
+If a lock is held my a thread but does not releases it, the program will stuck in this situation.
+
+A `Semaphore` is a atomic counter. This means that there is a guarantee that the operating system will not swap out the thread in the middle of incrementing or decrementing the counter.
+
+A `threading.Timer` is a way to schedule a function to be called after a certain amount of time has passed.
+
+A `threading.Barrier` can be used to keep a fixed number of threads in sync.
 
 ## MultiProcessing
 
