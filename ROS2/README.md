@@ -1,6 +1,7 @@
 # ROS2
 
-<details open="open">
+<!-- <details open="open"> -->
+<details>
   <summary>Table of Contents</summary>
   <ol>
     <li><a href="#Concepts">Concepts</a></li>
@@ -38,107 +39,118 @@
 <details open="open">
   <summary>Learning Status</summary>
 	<ul>
-		<li>- [ ] sddd</li>
-		<li>- [ ] sddd</li>
-		<li>- [ ] sddd</li>
+		<li>- [ ] ROS Wiki</li>
+			<ul>
+				<li>- [ ] Tutorials</li>
+					<ul>
+						<li>CLI Tools</li>
+							<ul>
+								<li>Configuring environment</li>
+								<li>Using turtlesim, ros2, and rqt</li>
+								<li>Understanding nodes</li>
+								<li>Understanding topics</li>
+								<li>Understanding services</li>
+								<li>Understanding parameters</li>
+								<li>Understanding actions</li>
+								<li>Using rqt_console to view logs</li>
+								<li>Launching nodes</li>
+								<li>Recording and playing back data</li>
+							</ul>
+						<li>Client Libraries</li>
+							<ul>
+								<li>Using colcon to build packages</li>
+								<li>Creating a workspace</li>
+								<li>Creating a package</li>
+								<li>Writing a simple publisher and subscriber (Python)</li>
+								<li>Writing a simple service and client (Python)</li>
+								<li>Creating custom msg and srv files</li>
+								<li>Implementing custom interfaces</li>
+								<li>Using parameters in a class (Python)</li>
+								<li>Using ros2doctor to identify issues</li>
+								<li>Creating and using plugins (C++)</li>
+							</ul>
+						<li>Intermediate</li>
+							<ul>
+								<li>Managing Dependencies with rosdep</li>
+								<li>Creating an action</li>
+								<li>Writing an action server and client (C++)</li>
+								<li>Writing an action server and client (Python)</li>
+								<li>Composing multiple nodes in a single process</li>
+								<li>Monitoring for parameter changes (C++)</li>
+								<li>Launch</li>
+								<li>tf2</li>
+								<li>Testing</li>
+								<li>URDF</li>
+							</ul>
+						<li>Advance</li>
+							<ul>
+								<li>Enabling topic statistics (C++)</li>
+								<li>Using Fast DDS Discovery Server as discovery protocol</li>
+								<li>Implementing a custom memory allocator</li>
+								<li>Unlocking the potential of Fast DDS middleware</li>
+								<li>Recording a bag from a node (C++)</li>
+								<li>Recording a bag from a node (Python)</li>
+								<li>Reading from a bag file (C++)</li>
+								<li>Simulators</li>
+								<li>Security</li>
+							</ul>
+						<li>Demos</li>
+							<ul</li>>
+								<li>Using quality-of-service settings for lossy networks</li>
+								<li>Managing nodes with managed lifecycles</li>
+								<li>Setting up efficient intra-process communication</li>
+								<li>Recording and playing back data with rosbag using the ROS 1 bridge</li>
+								<li>Understanding real-time programming</li>
+								<li>Experimenting with a dummy robot</li>
+								<li>Logging</li>
+								<li>Creating a content filtering subscription
+							</ul>
+						<li>Miscellaneous</li>
+					</ul>
+				<li>- [ ] How To Guide</li>
+					<ul>
+						<li>Installation troubleshooting</li>
+						<li>Developing a ROS 2 package</li>
+						<li>ament_cmake user documentation</li>
+						<li>ament_cmake_python user documentation</li>
+						<li>Migrating from ROS 1 to ROS 2</li>
+						<li>Using Python, XML, and YAML for ROS 2 Launch Files</li>
+						<li>Using ROS 2 launch to launch composable nodes</li>
+						<li>Passing ROS arguments to nodes via the command-line</li>
+						<li>Synchronous vs. asynchronous service clients</li>
+						<li>DDS tuning information</li>
+						<li>rosbag2: Overriding QoS Policies</li>
+						<li>Working with multiple ROS 2 middleware implementations</li>
+						<li>Cross-compilation</li>
+						<li>Releasing a Package</li>
+						<li>Using Python Packages with ROS 2</li>
+						<li>Porting RQt plugins to Windows</li>
+						<li>Running ROS 2 nodes in Docker</li>
+						<li>Visualizing ROS 2 data with Foxglove Studio</li>
+						<li>ROS 2 Package Maintainer Guide</li>
+						<li>Building a custom Debian package</li>
+						<li>Building ROS 2 with tracing instrumentation</li>
+						<li>Topics vs Services vs Actions</li>
+						<li>Using variants</li>
+						<li>Using the ros2 param command-line tool</li>
+						<li>Using ros1_bridge with upstream ROS on Ubuntu 22.04</li>
+						<li>Disabling Zero Copy Loaned Messages</li>
+						<li>ROS 2 on Raspberry Pi</li>
+						<li>Using Callback Groups</li>
+						<li>Setup ROS 2 with VSCode and Docker</li>
+					</ul>
+				<li>- [ ] Concepts</li>
+			</ul>
+		<li>- [ ] Robotics Back-End</li>
 	</ul>
 </details>
 
 
 
-**Learning Status**
 
-- [x] ROS - Mecharithm
-- [ ] ROS wiki
-  - [x] Tutorials
-    - [x] CLI Tools
-		-  Configuring environment
-		-  Using turtlesim, ros2, and rqt
-		-  Understanding nodes
-		-  Understanding topics
-		-  Understanding services
-		-  Understanding parameters
-		-  Understanding actions
-		-  Using rqt_console to view logs
-		-  Launching nodes
-		-  Recording and playing back data
-    - [x] Client Libraries
-		-  Using colcon to build packages
-		-  Creating a workspace
-		-  Creating a package
-		-  Writing a simple publisher and subscriber (Python)
-		-  Writing a simple service and client (Python)
-		-  Creating custom msg and srv files
-		-  Implementing custom interfaces
-		-  Using parameters in a class (Python)
-		-  Using ros2doctor to identify issues
-		-  Creating and using plugins (C++)
-    - [x] Intermediate
-		-  Managing Dependencies with rosdep
-		-  Creating an action
-		-  Writing an action server and client (C++)
-		-  Writing an action server and client (Python)
-		-  Composing multiple nodes in a single process
-		-  Monitoring for parameter changes (C++)
-		-  Launch
-		-  tf2
-		-  Testing
-		-  URDF
-    - [x] Advance
-		-  Enabling topic statistics (C++)
-		-  Using Fast DDS Discovery Server as discovery protocol
-		-  Implementing a custom memory allocator
-		-  Unlocking the potential of Fast DDS middleware
-		-  Recording a bag from a node (C++)
-		-  Recording a bag from a node (Python)
-		-  Reading from a bag file (C++)
-		-  Simulators
-		-  Security
-    - [x] Demos
-		- Using quality-of-service settings for lossy networks
-		- Managing nodes with managed lifecycles
-		- Setting up efficient intra-process communication
-		- Recording and playing back data with rosbag using the ROS 1 bridge
-		- Understanding real-time programming
-		- Experimenting with a dummy robot
-		- Logging
-		- Creating a content filtering subscription
-    - [x] ~~Miscellaneous~~
-  - [ ] How to Guides
-		- Installation troubleshooting
-		- Developing a ROS 2 package
-		- ament_cmake user documentation
-		- ament_cmake_python user documentation
-		- Migrating from ROS 1 to ROS 2
-		- Using Python, XML, and YAML for ROS 2 Launch Files
-		- Using ROS 2 launch to launch composable nodes
-		- Passing ROS arguments to nodes via the command-line
-		- Synchronous vs. asynchronous service clients
-		- DDS tuning information
-		- rosbag2: Overriding QoS Policies
-		- Working with multiple ROS 2 middleware implementations
-		- Cross-compilation
-		- Releasing a Package
-		- Using Python Packages with ROS 2
-		- Porting RQt plugins to Windows
-		- Running ROS 2 nodes in Docker
-		- Visualizing ROS 2 data with Foxglove Studio
-		- ROS 2 Package Maintainer Guide
-		- Building a custom Debian package
-		- Building ROS 2 with tracing instrumentation
-		- Topics vs Services vs Actions
-		- Using variants
-		- Using the ros2 param command-line tool
-		- Using ros1_bridge with upstream ROS on Ubuntu 22.04
-		- Disabling Zero Copy Loaned Messages
-		- ROS 2 on Raspberry Pi
-		- Using Callback Groups
-		- Setup ROS 2 with VSCode and Docker
-  - [ ] Concepts
-- [ ] Robotics Back-End
-- [ ] The Construct
+<!-- - [ ] The Construct
 - [ ] Raspberry Pi
-- [ ] Linux
+- [ ] Linux -->
 
 
 ## Concepts
