@@ -21,6 +21,7 @@
         <li><a href="#Script-Node-Executable-Name">Script vs Node vs Executable Name</a></li>
         <li><a href="#Custom-ROS-message">Custom ROS message</a></li>
         <li><a href="#ros2doctor">ros2doctor</a></li>
+        <li><a href="#CMake">CMake</a></li>
     </ol>
     <li><a href="#Projects">Projects</a></li>
         <ol>
@@ -34,13 +35,22 @@
   </ol>
 </details>
 
+<details open="open">
+  <summary>Learning Status</summary>
+	<ul>
+		<li>- [ ] sddd</li>
+		<li>- [ ] sddd</li>
+		<li>- [ ] sddd</li>
+	</ul>
+</details>
+
 
 
 **Learning Status**
 
 - [x] ROS - Mecharithm
 - [ ] ROS wiki
-  - [ ] Tutorials
+  - [x] Tutorials
     - [x] CLI Tools
 		-  Configuring environment
 		-  Using turtlesim, ros2, and rqt
@@ -93,8 +103,37 @@
 		- Experimenting with a dummy robot
 		- Logging
 		- Creating a content filtering subscription
-    - [ ] ~~Miscellaneous~~
+    - [x] ~~Miscellaneous~~
   - [ ] How to Guides
+		- Installation troubleshooting
+		- Developing a ROS 2 package
+		- ament_cmake user documentation
+		- ament_cmake_python user documentation
+		- Migrating from ROS 1 to ROS 2
+		- Using Python, XML, and YAML for ROS 2 Launch Files
+		- Using ROS 2 launch to launch composable nodes
+		- Passing ROS arguments to nodes via the command-line
+		- Synchronous vs. asynchronous service clients
+		- DDS tuning information
+		- rosbag2: Overriding QoS Policies
+		- Working with multiple ROS 2 middleware implementations
+		- Cross-compilation
+		- Releasing a Package
+		- Using Python Packages with ROS 2
+		- Porting RQt plugins to Windows
+		- Running ROS 2 nodes in Docker
+		- Visualizing ROS 2 data with Foxglove Studio
+		- ROS 2 Package Maintainer Guide
+		- Building a custom Debian package
+		- Building ROS 2 with tracing instrumentation
+		- Topics vs Services vs Actions
+		- Using variants
+		- Using the ros2 param command-line tool
+		- Using ros1_bridge with upstream ROS on Ubuntu 22.04
+		- Disabling Zero Copy Loaned Messages
+		- ROS 2 on Raspberry Pi
+		- Using Callback Groups
+		- Setup ROS 2 with VSCode and Docker
   - [ ] Concepts
 - [ ] Robotics Back-End
 - [ ] The Construct
