@@ -8,7 +8,7 @@
 
 This repository contains self learning and understanding of Robot Operating System.
 
-**Note**: pubsub, srvcli, node_parameters, custom_interface, actionsrvcli, tf2_tutorial are ROS2 packages and custom_interface contains custom rosmsg to represent a  Adjacency list used in project <a href="https://github.com/maker-ATOM/Path-Planning-Algorithms">Path-Planning-Algorithms</a>
+**Note**: pubsub, srvcli, node_parameters, custom_interface, actionsrvcli, tf2_tutorial, multi_threads are ROS2 packages and custom_interface contains custom rosmsg to represent a  Adjacency list used in project <a href="https://github.com/maker-ATOM/Path-Planning-Algorithms">Path-Planning-Algorithms</a>
 
 <h3>Python for ROS</h3>
 Core python concepts with OOP in python.

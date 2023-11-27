@@ -8,6 +8,9 @@
         <li><a href="#Environment">Environment</a></li>
         <li><a href="#RQT-and-ROS2-tools">RQT and ROS2 tools</a></li>
         <li><a href="#Nodes">Nodes</a></li>
+			<ol>
+			<li><a href="#LifeCycles">LifeCycles</a></li>
+			</ol>
         <li><a href="#Topics">Topics</a></li>
         <li><a href="#Services">Services</a></li>
         <li><a href="#Parameters">Parameters</a></li>
@@ -23,7 +26,7 @@
         <ol>
         <li><a href="#On-Going">On-Going</a></li>
         <li><a href="#Completed">Completed</a></li>
-    </ol>
+    	</ol>
     <li><a href="#Resources">Resources</a></li>
     <!-- <li><a href="#Description-of-src-files">Description of src files</a></li>
     <li><a href="#Project-Status">Project Status</a></li>
@@ -39,40 +42,57 @@
 - [ ] ROS wiki
   - [ ] Tutorials
     - [x] CLI Tools
-      -  Configuring environment
-      -  Using turtlesim, ros2, and rqt
-      -  Understanding nodes
-      -  Understanding topics
-      -  Understanding services
-      -  Understanding parameters
-      -  Understanding actions
-      -  Using rqt_console to view logs
-      -  Launching nodes
-      -  Recording and playing back data
+		-  Configuring environment
+		-  Using turtlesim, ros2, and rqt
+		-  Understanding nodes
+		-  Understanding topics
+		-  Understanding services
+		-  Understanding parameters
+		-  Understanding actions
+		-  Using rqt_console to view logs
+		-  Launching nodes
+		-  Recording and playing back data
     - [x] Client Libraries
-      -  Using colcon to build packages
-      -  Creating a workspace
-      -  Creating a package
-      -  Writing a simple publisher and subscriber (Python)
-      -  Writing a simple service and client (Python)
-      -  Creating custom msg and srv files
-      -  Implementing custom interfaces
-      -  Using parameters in a class (Python)
-      -  Using ros2doctor to identify issues
-      -  Creating and using plugins (C++)
+		-  Using colcon to build packages
+		-  Creating a workspace
+		-  Creating a package
+		-  Writing a simple publisher and subscriber (Python)
+		-  Writing a simple service and client (Python)
+		-  Creating custom msg and srv files
+		-  Implementing custom interfaces
+		-  Using parameters in a class (Python)
+		-  Using ros2doctor to identify issues
+		-  Creating and using plugins (C++)
     - [x] Intermediate
-      -  Managing Dependencies with rosdep
-      -  Creating an action
-      -  Writing an action server and client (C++)
-      -  Writing an action server and client (Python)
-      -  Composing multiple nodes in a single process
-      -  Monitoring for parameter changes (C++)
-      -  Launch
-      -  tf2
-      -  Testing
-      -  URDF
-    - [ ] Advance
-    - [ ] Demos
+		-  Managing Dependencies with rosdep
+		-  Creating an action
+		-  Writing an action server and client (C++)
+		-  Writing an action server and client (Python)
+		-  Composing multiple nodes in a single process
+		-  Monitoring for parameter changes (C++)
+		-  Launch
+		-  tf2
+		-  Testing
+		-  URDF
+    - [x] Advance
+		-  Enabling topic statistics (C++)
+		-  Using Fast DDS Discovery Server as discovery protocol
+		-  Implementing a custom memory allocator
+		-  Unlocking the potential of Fast DDS middleware
+		-  Recording a bag from a node (C++)
+		-  Recording a bag from a node (Python)
+		-  Reading from a bag file (C++)
+		-  Simulators
+		-  Security
+    - [x] Demos
+		- Using quality-of-service settings for lossy networks
+		- Managing nodes with managed lifecycles
+		- Setting up efficient intra-process communication
+		- Recording and playing back data with rosbag using the ROS 1 bridge
+		- Understanding real-time programming
+		- Experimenting with a dummy robot
+		- Logging
+		- Creating a content filtering subscription
     - [ ] ~~Miscellaneous~~
   - [ ] How to Guides
   - [ ] Concepts
@@ -310,6 +330,36 @@ To run a node while setting a specific parameter,
 ros2 run <package_name> <executable_name> --ros-args -p <parameter_nmae>:=<parameter_value>
 ```
 
+#### LifeCycles
+
+ROS 2 introduces the concept of managed nodes, also called `LifecycleNodes`. Managed nodes contain a state machine with a set of predefined states. These states can be changed by invoking a transition id which indicates the succeeding consecutive state.
+A managed life cycle for nodes allows greater control over the state of ROS system. It will allow roslaunch to ensure that all components have been instantiated correctly before it allows any component to begin executing its behaviour. It will also allow nodes to be restarted or replaced on-line.
+
+These state are different from what we define to accomplish a particular task. These define the **health condition** of a node.
+
+Primary States (steady states):
+
+- unconfigured
+- inactive
+- active
+- shutdown
+
+Transition States (intermediate states):
+
+- configuring
+- activating
+- deactivating
+- cleaningup
+- shuttingdown
+
+The possible transitions to invoke are:
+
+- configure
+- activate
+- deactivate
+- cleanup
+- shutdown
+
 ### Topics
 Topics are a vital element of the ROS graph that act as a bus for nodes to exchange messages.
 A node may publish data to any number of topics and simultaneously have subscriptions to any number of topics.
@@ -507,7 +557,7 @@ We also republish the data stored in the bag for introspection.
 ros2 bag play <file_name>
 ```
 
-## Transforms
+### Transforms
 Publishing static transforms is useful to define the relationship between a robot base and its sensors or non-moving parts. When there no relative motion between the parts through operations of robot.
 
 Ideally to broadcast transforms we need not to create a script to do so, either we can use direct terminal to publish static transform,
@@ -560,6 +610,7 @@ The magnitude of a quaternion should always be one and hence should be normalize
 To apply the rotation of one quaternion to a pose, simply multiply the previous quaternion of the pose by the quaternion representing the desired rotation. The order of this multiplication matters.
 
 An easy way to invert a quaternion is to negate the w-component.
+
 ### Script Node Executable Name
 
 **Python Script Name**
