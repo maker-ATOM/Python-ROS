@@ -43,7 +43,7 @@
 			<ul>
 				<li>- [ ] Tutorials</li>
 					<ul>
-						<li>CLI Tools</li>
+						<li>- [x] CLI Tools</li>
 							<ul>
 								<li>Configuring environment</li>
 								<li>Using turtlesim, ros2, and rqt</li>
@@ -56,7 +56,7 @@
 								<li>Launching nodes</li>
 								<li>Recording and playing back data</li>
 							</ul>
-						<li>Client Libraries</li>
+						<li>- [x] Client Libraries</li>
 							<ul>
 								<li>Using colcon to build packages</li>
 								<li>Creating a workspace</li>
@@ -69,7 +69,7 @@
 								<li>Using ros2doctor to identify issues</li>
 								<li>Creating and using plugins (C++)</li>
 							</ul>
-						<li>Intermediate</li>
+						<li>- [x] Intermediate</li>
 							<ul>
 								<li>Managing Dependencies with rosdep</li>
 								<li>Creating an action</li>
@@ -82,7 +82,7 @@
 								<li>Testing</li>
 								<li>URDF</li>
 							</ul>
-						<li>Advance</li>
+						<li>- [x] Advance</li>
 							<ul>
 								<li>Enabling topic statistics (C++)</li>
 								<li>Using Fast DDS Discovery Server as discovery protocol</li>
@@ -94,8 +94,8 @@
 								<li>Simulators</li>
 								<li>Security</li>
 							</ul>
-						<li>Demos</li>
-							<ul</li>>
+						<li>- [x] Demos</li>
+							<ul>
 								<li>Using quality-of-service settings for lossy networks</li>
 								<li>Managing nodes with managed lifecycles</li>
 								<li>Setting up efficient intra-process communication</li>
@@ -103,7 +103,7 @@
 								<li>Understanding real-time programming</li>
 								<li>Experimenting with a dummy robot</li>
 								<li>Logging</li>
-								<li>Creating a content filtering subscription
+								<li>Creating a content filtering subscription</li>
 							</ul>
 						<li>Miscellaneous</li>
 					</ul>
