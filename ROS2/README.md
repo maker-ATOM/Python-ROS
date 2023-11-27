@@ -1,7 +1,7 @@
 # ROS2
 
-<!-- <details open="open"> -->
-<details>
+<details open="open">
+<!-- <details> -->
   <summary>Table of Contents</summary>
   <ol>
     <li><a href="#Concepts">Concepts</a></li>
@@ -10,10 +10,13 @@
         <li><a href="#RQT-and-ROS2-tools">RQT and ROS2 tools</a></li>
         <li><a href="#Nodes">Nodes</a></li>
 			<ol>
-			<li><a href="#LifeCycles">LifeCycles</a></li>
+				<li><a href="#LifeCycles">LifeCycles</a></li>
 			</ol>
         <li><a href="#Topics">Topics</a></li>
         <li><a href="#Services">Services</a></li>
+			<ol>
+				<li><a href="#Sync-vs-Async-service-calls">Sync vs Async service calls</a></li>
+			</ol>
         <li><a href="#Parameters">Parameters</a></li>
         <li><a href="#Actions">Actions</a></li>
         <li><a href="#Launch">Launch</a></li>
@@ -41,7 +44,7 @@
 	<ul>
 		<li>- [ ] ROS Wiki</li>
 			<ul>
-				<li>- [ ] Tutorials</li>
+				<li>- [x] Tutorials</li>
 					<ul>
 						<li>- [x] CLI Tools</li>
 							<ul>
@@ -111,32 +114,32 @@
 					<ul>
 						<li>Installation troubleshooting</li>
 						<li>Developing a ROS 2 package</li>
-						<li>ament_cmake user documentation</li>
-						<li>ament_cmake_python user documentation</li>
-						<li>Migrating from ROS 1 to ROS 2</li>
-						<li>Using Python, XML, and YAML for ROS 2 Launch Files</li>
+						<li>- [ ] ament_cmake user documentation</li>
+						<li>- [ ] ament_cmake_python user documentation</li>
+						<li>- [ ] Migrating from ROS 1 to ROS 2</li>
+						<li>- [x] Using Python, XML, and YAML for ROS 2 Launch Files</li>
 						<li>Using ROS 2 launch to launch composable nodes</li>
-						<li>Passing ROS arguments to nodes via the command-line</li>
-						<li>Synchronous vs. asynchronous service clients</li>
+						<li>- [x] Passing ROS arguments to nodes via the command-line</li>
+						<li>- [x] Synchronous vs. asynchronous service clients</li>
 						<li>DDS tuning information</li>
 						<li>rosbag2: Overriding QoS Policies</li>
 						<li>Working with multiple ROS 2 middleware implementations</li>
 						<li>Cross-compilation</li>
-						<li>Releasing a Package</li>
+						<li>- [ ] Releasing a Package</li>
 						<li>Using Python Packages with ROS 2</li>
 						<li>Porting RQt plugins to Windows</li>
 						<li>Running ROS 2 nodes in Docker</li>
 						<li>Visualizing ROS 2 data with Foxglove Studio</li>
-						<li>ROS 2 Package Maintainer Guide</li>
+						<li>- [ ] ROS 2 Package Maintainer Guide</li>
 						<li>Building a custom Debian package</li>
 						<li>Building ROS 2 with tracing instrumentation</li>
-						<li>Topics vs Services vs Actions</li>
+						<li>- [x] Topics vs Services vs Actions</li>
 						<li>Using variants</li>
 						<li>Using the ros2 param command-line tool</li>
 						<li>Using ros1_bridge with upstream ROS on Ubuntu 22.04</li>
 						<li>Disabling Zero Copy Loaned Messages</li>
 						<li>ROS 2 on Raspberry Pi</li>
-						<li>Using Callback Groups</li>
+						<li>- [ ] Using Callback Groups</li>
 						<li>Setup ROS 2 with VSCode and Docker</li>
 					</ul>
 				<li>- [ ] Concepts</li>
@@ -145,13 +148,9 @@
 	</ul>
 </details>
 
-
-
-
 <!-- - [ ] The Construct
 - [ ] Raspberry Pi
 - [ ] Linux -->
-
 
 ## Concepts
 
@@ -260,6 +259,8 @@ This tag declares dependencies for shared libraries, executables, Python modules
 <b>test_depend</b>
 This tag declares dependencies needed only by tests. Dependencies here should not be duplicated with keys specified by <build_depend>, <exec_depend>, or <depend>.
 
+To successfully build a custom package, all of the dependencies of the package to be built must be available locally or in rosdep. Additionally, all of the dependencies of the package should be properly declared in the package.xml file of the package.
+
 **Package**
 
 Package creation in ROS 2 uses ament as its build system and colcon as its build tool.
@@ -303,6 +304,10 @@ Threading is beneficial when performing task of node in single script, where cal
 Moreover callbacks of single node are not executed in multi-thread fashion because firstly all the methods are generally CPU-bound and the sequence of execution is handled using queue maintained by the spin entity of `rclpy`. 
 
 [Multi-threading](https://github.com/BruceChanJianLe/ros-multithreading)
+
+**Command Line Tools**
+
+When ever we use command line to see data pub on topic or use command line to set a param. pub on a topic, call a service the language used is YAML.
 
 ### RQT and ROS2 tools
 
@@ -381,6 +386,17 @@ To run a node while setting a specific parameter,
 ros2 run <package_name> <executable_name> --ros-args -p <parameter_nmae>:=<parameter_value>
 ```
 
+All ROS nodes take a set of arguments that allow various properties to be reconfigured. Examples include configuring the name/namespace of the node, topic/service names used, and parameters on the node. All ROS-specific arguments have to be specified after a --ros-args flag:
+
+```py
+ros2 run my_package node_executable --ros-args ...
+```
+
+**Note** ROS arguments are different from ROS parameters.
+
+Names within a node (e.g. topics/services) can be remapped using the syntax -r <old name>:=<new name>. The name/namespace of the node itself can be remapped using -r __node:=<new node name> and -r __ns:=<new node namespace>.
+
+
 #### LifeCycles
 
 ROS 2 introduces the concept of managed nodes, also called `LifecycleNodes`. Managed nodes contain a state machine with a set of predefined states. These states can be changed by invoking a transition id which indicates the succeeding consecutive state.
@@ -430,6 +446,8 @@ ros2 topic ...
 ```
 Double tab to view all available introspection tools of ROS2.
 
+- Should be used for continuous data streams (sensor data, robot state, …).
+- Are for continuous data flow. Data might be published and subscribed at any time independent of any senders/receivers. Many to many connection. Callbacks receive data once it is available. The publisher decides when data is sent.
 
 ### Services
 Services are based on a call-and-response model versus the publisher-subscriber model of topics. While topics allow nodes to subscribe to data streams and get continual updates, services only provide data when they are specifically called by a client.
@@ -480,6 +498,19 @@ ros2 service call <service_name> <service_type> <arguments>
 ```
 
 Request and response may or may not have same rosmsg, this structure is defined within a `.srv` file.
+
+- Should be used for remote procedure calls that terminate quickly, e.g. for querying the state of a node or doing a quick calculation such as IK. They should never be used for longer running processes, in particular processes that might be required to preempt if exceptional situations occur and they should never change or depend on state to avoid unwanted side effects for other nodes.
+- Simple blocking call. Mostly used for comparably fast tasks as requesting specific data. Semantically for processing requests.
+
+#### Sync vs Async service calls
+
+A synchronous client will block the calling thread when sending a request to a service until a response has been received; nothing else can happen on that thread during the call. The call can take arbitrary amounts of time to complete. Once complete, the response returns directly to the client.
+
+When using sync calls the rclpy spin and service callback should be separate threads as both calls are blocking.
+
+Deadlock occurs because rclpy.spin will not preempt the callback with the send_request call. In general, callbacks should only perform light and fast operations.
+
+An asynchronous client will immediately return future, a value that indicates whether the call and response is finished (not the value of the response itself), after sending a request to a service. The returned future may be queried for a response at any time.
 
 ### Parameters
 A parameter is a configuration value of a node. We can think of parameters as node settings. A node can store parameters as integers, floats, booleans, strings, and lists. In ROS 2, each node maintains its own parameters.
@@ -567,6 +598,12 @@ The section of this message above the first --- is the structure (data type and 
 
 An example of action could be A robot system would likely use actions for navigation. An action goal could tell a robot to travel to a position. While the robot navigates to the position, it can send updates along the way (i.e. feedback), and then a final result message once it’s reached its destination.
 
+- Should be used for any discrete behavior that moves a robot or that runs for a longer time but provides feedback during execution.
+- The most important property of actions is that they can be preempted and preemption should always be implemented cleanly by action servers.
+- Actions can keep state for the lifetime of a goal, i.e. if executing two action goals in parallel on the same server, for each client a separate state instance can be kept since the goal is uniquely identified by its id.
+- Slow perception routines which take several seconds to terminate or initiating a lower-level control mode are good use cases for actions.
+- More complex non-blocking background processing. Used for longer tasks like execution of robot actions. Semantically for real-world actions.
+
 ### Launch
 Launch files allow us to start up and configure a number of executables containing ROS 2 nodes simultaneously.
 
@@ -588,6 +625,13 @@ Launch files are also responsible for monitoring the state of processes it launc
 The system must be so designed that is can be reusable as possible.  This could be done by clustering related nodes and configurations into separate launch files. Afterwards, a top-level launch file dedicated to a specific configuration could be written. This would allow moving between identical robots to be done without changing the launch files at all. Even a change such as moving from a real robot to a simulated one can be done with only a few changes. Top-level launch files should be short, consist of includes to other files corresponding to subcomponents of the application, and commonly changed parameters. Writing launch files in the following manner makes it easy to swap out one piece of the system. However, there are cases when some nodes or launch files have to be launched separately due to performance and usage reasons.
 
 Unique namespaces allow the system to start two similar nodes without node name or topic name conflicts.
+
+To set the arguments that are passed to the launch file, you should use key:=value syntax.
+
+e.g
+```py
+ros2 launch <package_name> <launch_file_name> background_r:=255
+```
 
 ### ROSbag
 ros2 bag is a command line tool for recording data published on topics in our system. It accumulates the data passed on any number of topics and saves it in a database. We can then replay the data to reproduce the results of our tests and experiments. Recording topics is also a great way to share our work and allow others to recreate it.
@@ -711,6 +755,10 @@ ros2 doctor --report
 for full report.
 
 We can also examine running ROS2 system using doctor.
+
+### CMake
+
+The build information is then gathered in two files: the package.xml and the CMakeLists.txt, which must be in the same directory. The package.xml must contain all dependencies and a bit of metadata to allow colcon to find the correct build order for our packages, to install the required dependencies in CI, and to provide the information for a release with bloom. The CMakeLists.txt contains the commands to build and package executables and libraries.
 
 ## Projects
 
