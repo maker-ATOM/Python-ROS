@@ -147,7 +147,7 @@
 					</ul>
 				<li>- [ ] Concepts</li>
 					<ul>
-						<li>- [ ] Basic</li>
+						<li>- [x] Basic</li>
 							<ul>
 								<li>Nodes</li>
 								<li>Discovery</li>
@@ -159,7 +159,7 @@
 								<li>Introspection with command line tools</li>
 								<li>Launch</li>
 								<li>Client libraries</li>
-							<ul>
+							</ul>
 						<li>- [ ] Intermediate</li>
 							<ul>
 								<li>The ROS_DOMAIN_ID</li>
@@ -355,6 +355,14 @@ Discovery of nodes happens automatically through the underlying middleware of RO
 - Nodes periodically advertise their presence so that connections can be made with new-found entities, even after the initial discovery period.
 - Nodes advertise to other nodes when they go offline.
 
+**Client Libraries**
+
+`rclpy, rclcpp`
+
+Client libraries are the APIs that allow users to implement their ROS 2 code. Using client libraries, users gain access to ROS 2 concepts such as nodes, topics, services, etc
+
+The C++ client library (rclcpp) and the Python client library (rclpy) are both client libraries which utilize common functionality in rcl.
+
 ### RQT and ROS2 tools
 
 rqt is a graphical user interface (GUI) tool for ROS 2. Everything done in rqt can be done on the command line, but rqt provides a more user-friendly way to manipulate ROS 2 elements.
@@ -519,7 +527,9 @@ ROS2 is `anonymous`. This means that when a subscriber gets a piece of data, it 
 Services are based on a call-and-response model versus the publisher-subscriber model of topics. While topics allow nodes to subscribe to data streams and get continual updates, services only provide data when they are specifically called by a client.
 There can be many clients requesting a service from a server. But only one server exists serving the request.
 
- <p align="center">
+In ROS 2, a service refers to a remote procedure call. In other words, a node can make a remote procedure call to another node which will do a computation and return a result.
+
+<p align="center">
 	<img src="Images/
 Service-SingleServiceClient.gif"/>
 </p>
@@ -579,7 +589,14 @@ Deadlock occurs because rclpy.spin will not preempt the callback with the send_r
 An asynchronous client will immediately return future, a value that indicates whether the call and response is finished (not the value of the response itself), after sending a request to a service. The returned future may be queried for a response at any time.
 
 ### Parameters
+
 A parameter is a configuration value of a node. We can think of parameters as node settings. A node can store parameters as integers, floats, booleans, strings, and lists. In ROS 2, each node maintains its own parameters.
+
+Parameters in ROS 2 are associated with individual nodes. Parameters are used to configure nodes at startup (and during runtime), without changing the code. The lifetime of a parameter is tied to the lifetime of the node.
+
+Parameters in ROS 2 are associated with individual nodes. Parameters are used to configure nodes at startup (and during runtime), without changing the code. The lifetime of a parameter is tied to the lifetime of the node (though the node could implement some sort of persistence to reload values after restart).
+
+A ROS 2 node can register two different types of callbacks to be informed when changes are happening to parameters. Both of the callbacks are optional.
 
 To see the parameters belonging to our nodes, open a new terminal and enter the command:
 ```python
@@ -620,8 +637,10 @@ ros2 param describe /node_name parameter_name
 Often a node needs to respond to changes to its own parameters or another node’s parameters. The ParameterEventHandler class makes it easy to listen for parameter changes so that our code can respond to them.
 
 ### Actions
-Actions are one of the communication types in ROS 2 and are intended for long running tasks. They consist of three parts: a goal, feedback, and a result.
 
+In ROS 2, an action refers to a long-running remote procedure call with feedback and the ability to cancel or preempt the goal. For instance, the high-level state machine running a robot may call an action to tell the navigation subsystem to travel to a waypoint, which may take several seconds (or minutes) to do. Along the way, the navigation subsystem can provide feedback on how far along it is, and the high-level state machine has the option to cancel or preempt the travel to that waypoint.
+
+Actions are one of the communication types in ROS 2 and are intended for long running tasks. They consist of three parts: a goal, feedback, and a result.
 
 Actions are built on topics and services. Their functionality is similar to services, except actions can be canceled. They also provide steady feedback, as opposed to services which return a single response.
 
@@ -648,6 +667,7 @@ ros2 action list
 
 Each action is encompassed in a rosmsg.
 If we check the action provided within turtlesim,
+
 ```python
 ros2 interface show turtlesim/action/RotateAbsolute
 
@@ -682,12 +702,15 @@ The launch system in ROS 2 is responsible for helping the user describe the conf
 Each node launched through a launch files required package name, executable name and identification name at the minimal.
 
 **Substitutions**
+
 Substitutions are variables that are only evaluated during execution of the launch description and can be used to acquire specific information like a launch configuration, an environment variable, or to evaluate an arbitrary Python expression.
 
 **Event Handles**
+
 Launch files are also responsible for monitoring the state of processes it launched, as well as reporting and reacting to changes in the state of those processes. These changes are called events and can be handled by registering an event handler with the launch system. Event handlers can be registered for specific events and can be useful for monitoring the state of processes. Additionally, they can be used to define a complex set of rules which can be used to dynamically modify the launch file.
 
 **Launch File architecture**
+
 The system must be so designed that is can be reusable as possible.  This could be done by clustering related nodes and configurations into separate launch files. Afterwards, a top-level launch file dedicated to a specific configuration could be written. This would allow moving between identical robots to be done without changing the launch files at all. Even a change such as moving from a real robot to a simulated one can be done with only a few changes. Top-level launch files should be short, consist of includes to other files corresponding to subcomponents of the application, and commonly changed parameters. Writing launch files in the following manner makes it easy to swap out one piece of the system. However, there are cases when some nodes or launch files have to be launched separately due to performance and usage reasons.
 
 Unique namespaces allow the system to start two similar nodes without node name or topic name conflicts.
