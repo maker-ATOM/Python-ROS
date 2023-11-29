@@ -1,13 +1,14 @@
 # ROS2
 
-<details open="open">
-<!-- <details> -->
+<!-- <details open="open"> -->
+<details>
   <summary>Table of Contents</summary>
   <ol>
     <li><a href="#Concepts">Concepts</a></li>
     <ol>
         <li><a href="#Environment">Environment</a></li>
         <li><a href="#RQT-and-ROS2-tools">RQT and ROS2 tools</a></li>
+        <li><a href="#Interface">Interface</a></li>
         <li><a href="#Nodes">Nodes</a></li>
 			<ol>
 				<li><a href="#LifeCycles">LifeCycles</a></li>
@@ -26,6 +27,7 @@
         <li><a href="#Custom-ROS-message">Custom ROS message</a></li>
         <li><a href="#ros2doctor">ros2doctor</a></li>
         <li><a href="#CMake">CMake</a></li>
+        <li><a href="#Ament-Python">Ament Python</a></li>
     </ol>
     <li><a href="#Projects">Projects</a></li>
         <ol>
@@ -39,7 +41,8 @@
   </ol>
 </details>
 
-<details open="open">
+<!-- <details open="open"> -->
+<details>
   <summary>Learning Status</summary>
 	<ul>
 		<li>- [ ] ROS Wiki</li>
@@ -114,9 +117,9 @@
 					<ul>
 						<li>Installation troubleshooting</li>
 						<li>Developing a ROS 2 package</li>
-						<li>- [ ] ament_cmake user documentation</li>
-						<li>- [ ] ament_cmake_python user documentation</li>
-						<li>- [ ] Migrating from ROS 1 to ROS 2</li>
+						<li>- [x] ament_cmake user documentation</li>
+						<li>- [x] ament_cmake_python user documentation</li>
+						<li>- [x] Migrating from ROS 1 to ROS 2</li>
 						<li>- [x] Using Python, XML, and YAML for ROS 2 Launch Files</li>
 						<li>Using ROS 2 launch to launch composable nodes</li>
 						<li>- [x] Passing ROS arguments to nodes via the command-line</li>
@@ -125,12 +128,12 @@
 						<li>rosbag2: Overriding QoS Policies</li>
 						<li>Working with multiple ROS 2 middleware implementations</li>
 						<li>Cross-compilation</li>
-						<li>- [ ] Releasing a Package</li>
+						<li>- [x] Releasing a Package</li>
 						<li>Using Python Packages with ROS 2</li>
 						<li>Porting RQt plugins to Windows</li>
 						<li>Running ROS 2 nodes in Docker</li>
 						<li>Visualizing ROS 2 data with Foxglove Studio</li>
-						<li>- [ ] ROS 2 Package Maintainer Guide</li>
+						<li>- [x] ROS 2 Package Maintainer Guide</li>
 						<li>Building a custom Debian package</li>
 						<li>Building ROS 2 with tracing instrumentation</li>
 						<li>- [x] Topics vs Services vs Actions</li>
@@ -143,6 +146,41 @@
 						<li>Setup ROS 2 with VSCode and Docker</li>
 					</ul>
 				<li>- [ ] Concepts</li>
+					<ul>
+						<li>- [ ] Basic</li>
+							<ul>
+								<li>Nodes</li>
+								<li>Discovery</li>
+								<li>Interfaces</li>
+								<li>Topics</li>
+								<li>Services</li>
+								<li>Actions</li>
+								<li>Parameters</li>
+								<li>Introspection with command line tools</li>
+								<li>Launch</li>
+								<li>Client libraries</li>
+							<ul>
+						<li>- [ ] Intermediate</li>
+							<ul>
+								<li>The ROS_DOMAIN_ID</li>
+								<li>Different ROS 2 middleware vendors</li>
+								<li>Logging and logger configuration</li>
+								<li>Quality of Service settings</li>
+								<li>Executors</li>
+								<li>Topic statistics</li>
+								<li>Overview and usage of RQt</li>
+								<li>Composition</li>
+								<li>Cross-compilation</li>
+								<li>ROS 2 Security</li>
+								<li>Tf2</li>
+							</ul>
+						<li>- [ ] Advance</li>
+							<ul>
+								<li>The build system</li>
+								<li>Internal ROS 2 interfaces</li>
+								<li>ROS 2 middleware implementations</li>
+							</ul>
+					</ul>
 			</ul>
 		<li>- [ ] Robotics Back-End</li>
 	</ul>
@@ -309,6 +347,14 @@ Moreover callbacks of single node are not executed in multi-thread fashion becau
 
 When ever we use command line to see data pub on topic or use command line to set a param. pub on a topic, call a service the language used is YAML.
 
+**Discovery**
+
+Discovery of nodes happens automatically through the underlying middleware of ROS 2. It can be summarized as follows:
+
+- When a node is started, it advertises its presence to other nodes on the network with the same ROS domain (set with the ROS_DOMAIN_ID environment variable). Nodes respond to this advertisement with information about themselves so that the appropriate connections can be made and the nodes can communicate.
+- Nodes periodically advertise their presence so that connections can be made with new-found entities, even after the initial discovery period.
+- Nodes advertise to other nodes when they go offline.
+
 ### RQT and ROS2 tools
 
 rqt is a graphical user interface (GUI) tool for ROS 2. Everything done in rqt can be done on the command line, but rqt provides a more user-friendly way to manipulate ROS 2 elements.
@@ -362,10 +408,28 @@ There is no exact standard for what each level indicates, but it’s safe to ass
 The default level is Info. We will only see messages of the default severity level and more-severe levels.
 
 
+### interface
+
+ROS applications typically communicate through interfaces of one of three types: topics, services, or actions.
+
+- msg: .msg files are simple text files that describe the fields of a ROS message. They are used to generate source code for messages in different languages.
+- srv: .srv files describe a service. They are composed of two parts: a request and a response. The request and response are message declarations.
+- action: .action files describe actions. They are composed of three parts: a goal, a result, and feedback. Each part is a message declaration itself.
+
+Default values can be set to any field in the message type.
+
+Each constant definition is like a field description with a default value, except that this value can never be changed programatically.
+
 ### Nodes
 Each node in ROS should be responsible for a single, modular purpose, e.g. controlling the wheel motors or publishing the sensor data from a laser range-finder. Each node can send and receive data from other nodes via topics, services, actions, or parameters.
 
- <p align="center">
+Uses a client library to communicate with other nodes. 
+
+Nodes can communicate with other nodes within the same process, in a different process, or on a different machine. Nodes are typically the unit of computation in a ROS graph; each node should do **one logical thing**.
+
+Nodes can publish to named topics to deliver data to other nodes, or subscribe to named topics to get data from other nodes. They can also act as a service client to have another node perform a computation on their behalf, or as a service server to provide functionality to other nodes. For long-running computations, a node can act as an action client to have another node perform it on their behalf, or as an action server to provide functionality to other nodes. Nodes can provide configurable parameters to change behavior during run-time.
+
+<p align="center">
 	<img src="Images/Nodes-TopicandService.gif"/>
 </p>
 
@@ -448,6 +512,8 @@ Double tab to view all available introspection tools of ROS2.
 
 - Should be used for continuous data streams (sensor data, robot state, …).
 - Are for continuous data flow. Data might be published and subscribed at any time independent of any senders/receivers. Many to many connection. Callbacks receive data once it is available. The publisher decides when data is sent.
+
+ROS2 is `anonymous`. This means that when a subscriber gets a piece of data, it doesn’t generally know or care which publisher originally sent it (though it can find out if it wants). The benefit to this architecture is that publishers and subscribers can be swapped out at will without affecting the rest of the system.
 
 ### Services
 Services are based on a call-and-response model versus the publisher-subscriber model of topics. While topics allow nodes to subscribe to data streams and get continual updates, services only provide data when they are specifically called by a client.
@@ -758,7 +824,62 @@ We can also examine running ROS2 system using doctor.
 
 ### CMake
 
+
+CMake is an cross-platform build system that is designed to build, test, and package software projects. It provides a unified, high-level build script language that allows to specify how software should be built and how different components should be configured. CMake generates build files for various build systems. The typical workflow involves creating a CMakeLists.txt file in the root of the project that specifies the project structure, build options, and dependencies.
+
 The build information is then gathered in two files: the package.xml and the CMakeLists.txt, which must be in the same directory. The package.xml must contain all dependencies and a bit of metadata to allow colcon to find the correct build order for our packages, to install the required dependencies in CI, and to provide the information for a release with bloom. The CMakeLists.txt contains the commands to build and package executables and libraries.
+
+```py
+cmake_minimum_required(VERSION 3.8)
+project(my_package)
+
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+
+find_package(ament_cmake REQUIRED)
+
+if(BUILD_TESTING)
+  find_package(ament_lint_auto REQUIRED)
+
+  set(ament_cmake_copyright_FOUND TRUE)
+  
+  set(ament_cmake_cpplint_FOUND TRUE)
+  ament_lint_auto_find_test_dependencies()
+endif()
+
+ament_package()
+```
+
+Bare minimum contents of cmake when package is created.
+
+The project setup is done by ament_package() and this call must occur exactly once per package. ament_package() installs the package.xml, registers the package with the ament index, and installs configuration (and possibly target) files for CMake so that it can be found by other packages using find_package. Since ament_package() gathers a lot of information from the CMakeLists.txt it should be the last call in your CMakeLists.txt.
+
+Most ament_cmake projects will have dependencies on other packages. In CMake, this is accomplished by calling find_package.
+
+In CMake nomenclature, targets are the artifacts that this project will create. Either libraries or executables can be created, and a single project can contain zero or many of each of them.
+
+There are two ways to link your targets against a dependency.
+
+The first and recommended way is to use the ament macro ament_target_dependencies. The second way is to use target_link_libraries.
+
+### Ament Python
+
+`ament_cmake_python` is a package that provides CMake functions for packages of the `ament_cmake` build type that contain Python code.
+
+The outline of a package called “my_project” with the ament_cmake build type that uses `ament_cmake_python` looks like:
+
+```py
+└── my_project
+    ├── CMakeLists.txt
+    ├── package.xml
+    └── my_project
+        ├── __init__.py
+        └── my_script.py
+```
+The __init__.py file can be empty, but it is needed to make Python treat the directory containing it as a package. There can also be a `src` or `include` directory alongside the `CMakeLists.txt` which holds C/C++ code.
+
+The package must declare a dependency on ament_cmake_python in its package.xml.
 
 ## Projects
 
