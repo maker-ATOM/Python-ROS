@@ -45,7 +45,7 @@
 <details>
   <summary>Learning Status</summary>
 	<ul>
-		<li>- [ ] ROS Wiki</li>
+		<li>- [x] ROS Wiki</li>
 			<ul>
 				<li>- [x] Tutorials</li>
 					<ul>
@@ -113,7 +113,7 @@
 							</ul>
 						<li>Miscellaneous</li>
 					</ul>
-				<li>- [ ] How To Guide</li>
+				<li>- [x] How To Guide</li>
 					<ul>
 						<li>Installation troubleshooting</li>
 						<li>Developing a ROS 2 package</li>
@@ -142,10 +142,10 @@
 						<li>Using ros1_bridge with upstream ROS on Ubuntu 22.04</li>
 						<li>Disabling Zero Copy Loaned Messages</li>
 						<li>ROS 2 on Raspberry Pi</li>
-						<li>- [ ] Using Callback Groups</li>
+						<li>- [x] Using Callback Groups</li>
 						<li>Setup ROS 2 with VSCode and Docker</li>
 					</ul>
-				<li>- [ ] Concepts</li>
+				<li>- [x] Concepts</li>
 					<ul>
 						<li>- [x] Basic</li>
 							<ul>
@@ -160,7 +160,7 @@
 								<li>Launch</li>
 								<li>Client libraries</li>
 							</ul>
-						<li>- [ ] Intermediate</li>
+						<li>- [x] Intermediate</li>
 							<ul>
 								<li>The ROS_DOMAIN_ID</li>
 								<li>Different ROS 2 middleware vendors</li>
@@ -174,7 +174,7 @@
 								<li>ROS 2 Security</li>
 								<li>Tf2</li>
 							</ul>
-						<li>- [ ] Advance</li>
+						<li>- [x] Advance</li>
 							<ul>
 								<li>The build system</li>
 								<li>Internal ROS 2 interfaces</li>
@@ -329,6 +329,8 @@ IF any ROS2 package is not being located, the first thing we should do is check 
 
 **Spins**
 
+In the context of ROS 2 and executors, a callback means a function whose scheduling and execution is handled by an executor.
+
 When a node is spun it executes all the callbacks within the callback queue. These callbacks are generally associated to topic subscription, timers or service methods. Every time a event is triggered (data is published on the topic, timer has expired or server has responded) the associated callback is enqueued in the callback queue. These methods are then executed sequentially dequeuing one method at a time.
 
 The data associated to the callback method is bound with it once it is enqueued in the callback queue.
@@ -362,6 +364,49 @@ Discovery of nodes happens automatically through the underlying middleware of RO
 Client libraries are the APIs that allow users to implement their ROS 2 code. Using client libraries, users gain access to ROS 2 concepts such as nodes, topics, services, etc
 
 The C++ client library (rclcpp) and the Python client library (rclpy) are both client libraries which utilize common functionality in rcl.
+
+**Security**
+
+ROS 2 includes the ability to secure communications among nodes within the ROS 2 computational graph. Security happens through the underlying ROS 2 middleware
+
+**Quality of Service**
+
+ROS 2 offers a rich variety of Quality of Service (QoS) policies that allow you to tune communication between nodes. With the right set of Quality of Service policies, ROS 2 can be as reliable as TCP or as best-effort as UDP, with many, many possible states in between.
+
+- History
+  - Keep last
+  - Keep all
+- Depth
+  - Queue size
+- Reliability
+  - Best effort
+  - Reliable
+- Durability
+  - Transient local
+  - Volatile
+- Deadline
+  - Duration
+- Lifespan
+  - Duration
+- Liveliness
+  - Automatic
+  - Manual by topic
+- Lease Duration
+  - Duration
+
+**Executors**
+
+Execution management in ROS 2 is handled by Executors. An Executor uses one or more threads of the underlying operating system to invoke the callbacks of subscriptions, timers, service servers, action servers, etc. on incoming messages and events. 
+
+In the simplest case, the main thread is used for processing the incoming messages and events of a Node by calling rclcpp::spin(..)
+
+The call to spin(node) basically expands to an instantiation and invocation of the Single-Threaded Executor.
+
+three Executor types, Single-Threaded Executor, Static Single-Threaded Executor, Multi-Threaded Executor.
+
+ROS 2 allows organizing the callbacks of a node in groups. 
+
+If the processing time of the callbacks is shorter than the period with which messages and events occur, the Executor basically processes them in FIFO order. However, if the processing time of some callbacks is longer, messages and events will be queued on the lower layers of the stack.
 
 ### RQT and ROS2 tools
 
@@ -415,6 +460,11 @@ There is no exact standard for what each level indicates, but it’s safe to ass
 
 The default level is Info. We will only see messages of the default severity level and more-severe levels.
 
+The logging subsystem in ROS 2 aims to deliver logging messages to a variety of targets, including:
+
+- To the console (if one is attached)
+- To log files on disk (if local storage is available)
+- To the /rosout topic on the ROS 2 network
 
 ### interface
 
@@ -522,6 +572,8 @@ Double tab to view all available introspection tools of ROS2.
 - Are for continuous data flow. Data might be published and subscribed at any time independent of any senders/receivers. Many to many connection. Callbacks receive data once it is available. The publisher decides when data is sent.
 
 ROS2 is `anonymous`. This means that when a subscriber gets a piece of data, it doesn’t generally know or care which publisher originally sent it (though it can find out if it wants). The benefit to this architecture is that publishers and subscribers can be swapped out at will without affecting the rest of the system.
+
+ROS 2 provides integrated measurement of statistics for messages received by any subscription. Allowing a user to collect subscription statistics enables them to characterize the performance of their system or aid in diagnosis of any present issues.
 
 ### Services
 Services are based on a call-and-response model versus the publisher-subscriber model of topics. While topics allow nodes to subscribe to data streams and get continual updates, services only provide data when they are specifically called by a client.
@@ -742,6 +794,11 @@ ros2 bag play <file_name>
 ```
 
 ### Transforms
+
+tf2 is the transform library, which lets the user keep track of multiple coordinate frames over time. tf2 maintains the relationship between coordinate frames in a tree structure buffered in time and lets the user transform points, vectors, etc. between any two coordinate frames at any desired point in time.
+
+tf2 can operate in a distributed system. 
+
 Publishing static transforms is useful to define the relationship between a robot base and its sensors or non-moving parts. When there no relative motion between the parts through operations of robot.
 
 Ideally to broadcast transforms we need not to create a script to do so, either we can use direct terminal to publish static transform,
